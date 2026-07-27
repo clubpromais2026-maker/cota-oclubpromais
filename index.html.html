@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simulação Club PRÓ+ | Proteção Veicular</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0A1F33;
+    --steel:#16324F;
+    --steel-light:#1F4467;
+    --asphalt:#2B333A;
+    --amber:#FFC53D;
+    --amber-dark:#E6A800;
+    --guardrail:#F5F7FA;
+    --muted:#9FB3C8;
+    --signal:#34D399;
+    --danger:#FF6B6B;
+    --radius:14px;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:
+      radial-gradient(1200px 600px at 50% -10%, #163a5c 0%, var(--ink) 55%);
+    color:var(--guardrail);
+    font-family:'Inter', sans-serif;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    padding:0 0 60px;
+    position:relative;
+    overflow-x:hidden;
+  }
+  /* road centerline running down the page */
+  body::before{
+    content:"";
+    position:absolute;
+    top:0; left:50%;
+    width:6px;
+    height:100%;
+    transform:translateX(-50%);
+    background:repeating-linear-gradient(
+      to bottom,
+      var(--amber) 0px, var(--amber) 28px,
+      transparent 28px, transparent 56px
+    );
+    opacity:0.14;
+    animation:roll 1.6s linear infinite;
+    pointer-events:none;
+  }
+  @keyframes roll{
+    from{background-position:0 0;}
+    to{background-position:0 56px;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    body::before{animation:none;}
+  }
+
+  .wrap{
+    width:100%;
+    max-width:460px;
+    padding:36px 20px 0;
+    position:relative;
+    z-index:1;
+  }
+
+  .badge-row{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    margin-bottom:18px;
+  }
+  .badge{
+    font-size:11px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--ink);
+    background:var(--amber);
+    padding:5px 10px;
+    border-radius:999px;
+    font-weight:700;
+  }
+  .badge.outline{
+    background:transparent;
+    color:var(--muted);
+    border:1px solid #2E4E70;
+  }
+
+  .hero{
+    text-align:center;
+    margin-bottom:28px;
+  }
+  .eyebrow{
+    font-family:'Inter', sans-serif;
+    font-size:12px;
+    letter-spacing:0.2em;
+    text-transform:uppercase;
+    color:var(--muted);
+    margin:0 0 10px;
+  }
+  h1{
+    font-family:'Barlow Condensed', sans-serif;
+    font-weight:800;
+    font-size:clamp(30px, 8vw, 42px);
+    line-height:1.05;
+    letter-spacing:0.01em;
+    margin:0 0 12px;
+    color:var(--guardrail);
+    text-transform:uppercase;
+  }
+  h1 span{color:var(--amber);}
+  .sub{
+    font-size:15px;
+    line-height:1.5;
+    color:var(--muted);
+    max-width:360px;
+    margin:0 auto;
+  }
+
+  .card{
+    background:linear-gradient(180deg, var(--steel) 0%, #142B44 100%);
+    border:1px solid #234465;
+    border-radius:var(--radius);
+    padding:26px 22px 24px;
+    box-shadow:0 20px 50px -20px rgba(0,0,0,0.6);
+  }
+  .card-title{
+    font-family:'Barlow Condensed', sans-serif;
+    font-weight:700;
+    font-size:20px;
+    letter-spacing:0.02em;
+    text-transform:uppercase;
+    color:var(--guardrail);
+    margin:0 0 4px;
+  }
+  .card-sub{
+    font-size:13px;
+    color:var(--muted);
+    margin:0 0 20px;
+  }
+
+  label{
+    display:block;
+    font-size:11px;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    color:var(--muted);
+    font-weight:600;
+    margin-bottom:6px;
+  }
+  .field{margin-bottom:16px;}
+  input, select{
+    width:100%;
+    background:var(--ink);
+    border:1px solid #2E4E70;
+    border-radius:10px;
+    padding:13px 14px;
+    font-size:15px;
+    color:var(--guardrail);
+    font-family:'Inter', sans-serif;
+    transition:border-color .15s ease, box-shadow .15s ease;
+  }
+  select{
+    appearance:none;
+    -webkit-appearance:none;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='9' viewBox='0 0 14 9'><path d='M1 1l6 6 6-6' stroke='%239FB3C8' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+    background-repeat:no-repeat;
+    background-position:right 14px center;
+    padding-right:36px;
+  }
+  input::placeholder{color:#5D7590;}
+  input:focus, select:focus{
+    outline:none;
+    border-color:var(--amber);
+    box-shadow:0 0 0 3px rgba(255,197,61,0.18);
+  }
+  .row2{display:grid; grid-template-columns:1fr 1fr; gap:12px;}
+  .error{
+    font-size:12px;
+    color:var(--danger);
+    margin-top:5px;
+    display:none;
+  }
+  .field.invalid input, .field.invalid select{border-color:var(--danger);}
+  .field.invalid .error{display:block;}
+
+  button.submit{
+    width:100%;
+    margin-top:6px;
+    background:var(--amber);
+    color:var(--ink);
+    border:none;
+    border-radius:10px;
+    padding:15px 18px;
+    font-family:'Barlow Condensed', sans-serif;
+    font-size:19px;
+    font-weight:700;
+    letter-spacing:0.03em;
+    text-transform:uppercase;
+    cursor:pointer;
+    transition:transform .12s ease, background .15s ease;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+  }
+  button.submit:hover{background:var(--amber-dark);}
+  button.submit:active{transform:scale(0.98);}
+  button.submit svg{width:18px;height:18px;}
+
+  .privacy{
+    font-size:11px;
+    color:var(--muted);
+    text-align:center;
+    margin-top:12px;
+    line-height:1.5;
+  }
+
+  .trust{
+    display:flex;
+    justify-content:space-between;
+    gap:8px;
+    margin-top:26px;
+    padding-top:20px;
+    border-top:1px dashed #2E4E70;
+  }
+  .trust-item{
+    flex:1;
+    text-align:center;
+  }
+  .trust-item .n{
+    font-family:'Barlow Condensed', sans-serif;
+    font-weight:700;
+    font-size:20px;
+    color:var(--amber);
+    display:block;
+  }
+  .trust-item .l{
+    font-size:10px;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    color:var(--muted);
+  }
+
+  .plate{
+    margin-top:24px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+    font-size:11px;
+    color:var(--muted);
+    letter-spacing:0.05em;
+  }
+  .plate .dot{width:5px;height:5px;border-radius:50%;background:var(--signal);}
+
+  .success{
+    display:none;
+    text-align:center;
+    padding:30px 10px 6px;
+  }
+  .success.show{display:block;}
+  .card.hide-form .form-content{display:none;}
+  .success-icon{
+    width:52px;height:52px;border-radius:50%;
+    background:rgba(52,211,153,0.15);
+    display:flex;align-items:center;justify-content:center;
+    margin:0 auto 16px;
+  }
+  .success h2{
+    font-family:'Barlow Condensed', sans-serif;
+    text-transform:uppercase;
+    font-size:22px;
+    margin:0 0 8px;
+  }
+  .success p{
+    font-size:14px;
+    color:var(--muted);
+    margin:0;
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <div class="badge-row">
+    <span class="badge">Registrada na SUSEP</span>
+    <span class="badge outline">+10 anos de estrada</span>
+  </div>
+
+  <div class="hero">
+    <p class="eyebrow">Club PRÓ+ · Vale do Paraíba</p>
+    <h1>Proteja seu veículo<br>com quem <span>+</span> entende do assunto</h1>
+    <p class="sub">Preencha os dados abaixo e receba sua simulação personalizada direto no WhatsApp, sem burocracia.</p>
+  </div>
+
+  <div class="card" id="card">
+    <div class="form-content">
+      <p class="card-title">Quero uma simulação</p>
+      <p class="card-sub">Leva menos de 1 minuto</p>
+
+      <form id="leadForm" novalidate>
+        <div class="field" data-field="nome">
+          <label for="nome">Nome completo</label>
+          <input type="text" id="nome" placeholder="Como podemos te chamar?" autocomplete="name">
+          <span class="error">Digite seu nome completo</span>
+        </div>
+
+        <div class="field" data-field="whatsapp">
+          <label for="whatsapp">WhatsApp</label>
+          <input type="tel" id="whatsapp" placeholder="(12) 9 9999-9999" autocomplete="tel" inputmode="numeric">
+          <span class="error">Digite um número válido com DDD</span>
+        </div>
+
+        <div class="row2">
+          <div class="field" data-field="veiculo">
+            <label for="veiculo">Tipo de veículo</label>
+            <select id="veiculo">
+              <option value="" disabled selected>Selecione</option>
+              <option>Carro</option>
+              <option>Moto</option>
+              <option>Caminhão</option>
+              <option>Van</option>
+              <option>SUV</option>
+              <option>Pick-up</option>
+            </select>
+            <span class="error">Selecione o veículo</span>
+          </div>
+
+          <div class="field" data-field="ano">
+            <label for="ano">Ano</label>
+            <select id="ano">
+              <option value="" disabled selected>Ano</option>
+            </select>
+            <span class="error">Selecione o ano</span>
+          </div>
+        </div>
+
+        <div class="field" data-field="cidade">
+          <label for="cidade">Cidade</label>
+          <input type="text" id="cidade" placeholder="Ex: Taubaté" autocomplete="address-level2">
+          <span class="error">Digite sua cidade</span>
+        </div>
+
+        <button type="submit" class="submit">
+          Quero minha simulação
+          <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+
+        <p class="privacy">Ao enviar, você será direcionado ao WhatsApp do seu consultor Club PRÓ+ para receber a simulação. Seus dados não são compartilhados com terceiros.</p>
+      </form>
+    </div>
+
+    <div class="success" id="success">
+      <div class="success-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#34D399" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <h2>Quase lá!</h2>
+      <p>Abrimos o WhatsApp com sua simulação pronta.<br>Se não abriu automaticamente, <a href="#" id="fallbackLink" style="color:#FFC53D;">toque aqui</a>.</p>
+    </div>
+
+  </div>
+
+  <div class="trust">
+    <div class="trust-item"><span class="n">24h</span><span class="l">Assistência nacional</span></div>
+    <div class="trust-item"><span class="n">+10</span><span class="l">Anos de mercado</span></div>
+    <div class="trust-item"><span class="n">SUSEP</span><span class="l">Regularizada</span></div>
+  </div>
+
+  <div class="plate"><span class="dot"></span> Simulação sem compromisso</div>
+
+</div>
+
+<script>
+  // ⚠️ TROQUE pelo seu número de WhatsApp (formato: 55 + DDD + número, só dígitos)
+  const WHATSAPP_NUMBER = "551231997399";
+
+  // popular anos (atual até 1970)
+  const anoSelect = document.getElementById('ano');
+  const currentYear = new Date().getFullYear();
+  for (let y = currentYear; y >= 1970; y--) {
+    const opt = document.createElement('option');
+    opt.value = y;
+    opt.textContent = y;
+    anoSelect.appendChild(opt);
+  }
+
+  const form = document.getElementById('leadForm');
+  const card = document.getElementById('card');
+  const success = document.getElementById('success');
+  const fallbackLink = document.getElementById('fallbackLink');
+
+  function setError(field, hasError){
+    const el = form.querySelector(`[data-field="${field}"]`);
+    el.classList.toggle('invalid', hasError);
+  }
+
+  function validatePhone(v){
+    const digits = v.replace(/\D/g,'');
+    return digits.length >= 10 && digits.length <= 11;
+  }
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+
+    const nome = document.getElementById('nome').value.trim();
+    const whatsapp = document.getElementById('whatsapp').value.trim();
+    const veiculo = document.getElementById('veiculo').value;
+    const ano = document.getElementById('ano').value;
+    const cidade = document.getElementById('cidade').value.trim();
+
+    let valid = true;
+    setError('nome', nome.length < 3); if(nome.length < 3) valid = false;
+    setError('whatsapp', !validatePhone(whatsapp)); if(!validatePhone(whatsapp)) valid = false;
+    setError('veiculo', !veiculo); if(!veiculo) valid = false;
+    setError('ano', !ano); if(!ano) valid = false;
+    setError('cidade', cidade.length < 2); if(cidade.length < 2) valid = false;
+
+    if(!valid) return;
+
+    const msg = `Olá! Vim pelo anúncio da Club PRÓ+ e quero uma simulação de proteção veicular.%0A%0A*Nome:* ${encodeURIComponent(nome)}%0A*Veículo:* ${encodeURIComponent(veiculo)}%0A*Ano:* ${ano}%0A*Cidade:* ${encodeURIComponent(cidade)}%0A*WhatsApp:* ${encodeURIComponent(whatsapp)}`;
+
+    const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${msg}`;
+
+    card.classList.add('hide-form');
+    success.classList.add('show');
+    fallbackLink.href = url;
+
+    window.open(url, '_blank');
+  });
+
+  // limpa erro ao digitar/selecionar
+  ['nome','whatsapp','veiculo','ano','cidade'].forEach(id => {
+    document.getElementById(id).addEventListener('input', () => {
+      const field = document.getElementById(id).closest('.field');
+      field.classList.remove('invalid');
+    });
+    document.getElementById(id).addEventListener('change', () => {
+      const field = document.getElementById(id).closest('.field');
+      field.classList.remove('invalid');
+    });
+  });
+</script>
+
+</body>
+</html>
