@@ -362,7 +362,7 @@
 
   <div class="card" id="card">
     <div class="form-content">
-      <p class="card-title">Quero cotar</p>
+      <p class="card-title">Vamos cotar</p>
       <p class="card-sub">Leva menos de 1 minuto</p>
 
       <form id="leadForm" novalidate>
@@ -433,7 +433,7 @@
           <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
 
-        <p class="privacy">Ao enviar, você será direcionado ao WhatsApp do seu consultor Club PRÓ+ para receber a simulação. Seus dados não são compartilhados com terceiros.</p>
+        <p class="privacy">Ao enviar, você será direcionado ao WhatsApp do seu consultor Club PRÓ + para receber a sua cotação, Seus dados não são compartilhados com terceiros.</p>
       </form>
     </div>
 
@@ -442,7 +442,7 @@
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#34D399" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </div>
       <h2>Quase lá!</h2>
-      <p>Você será transferido de forma automática para um de nossos representantes.<br>Se nada aconteceu, <a href="#" id="fallbackLink" style="color:#FFC53D;">toque aqui</a>.</p>
+      <p>Abrimos o WhatsApp com sua cotação pronta.<br>Se não abriu automaticamente, <a href="#" id="fallbackLink" style="color:#FFC53D;">toque aqui</a>.</p>
     </div>
 
   </div>
@@ -461,7 +461,11 @@
   // ⚠️ TROQUE pelo seu número de WhatsApp (formato: 55 + DDD + número, só dígitos)
   const WHATSAPP_NUMBER = "551231997399";
 
-  // popular anos (atual até 1990)
+  // ⚠️ TROQUE pela URL do seu Google Apps Script (Web App), depois de publicar.
+  // Deixe como está ("") se ainda não configurou — o formulário funciona normalmente sem isso.
+  const SHEETS_WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbyDT0HUM4pxBDoWhkvfpixLYt0lx5l_1tydnHsngGgj8CqyQcFrSPiQE4fWAWj5ZVUV8A/exec";
+
+  // popular anos (atual até 1970)
   const anoSelect = document.getElementById('ano');
   const currentYear = new Date().getFullYear();
   for (let y = currentYear; y >= 1970; y--) {
@@ -516,9 +520,27 @@
 
     if(!valid) return;
 
-    const msg = `Olá! Vim pelo anúncio da Club PRÓ + e quero uma cotação de proteção para o meu veículo.%0A%0A*Nome:* ${encodeURIComponent(nome)}%0A*Veículo:* ${encodeURIComponent(veiculo)}%0A*Ano:* ${ano}%0A*Cidade:* ${encodeURIComponent(cidade)}%0A*Motorista de app:* ${encodeURIComponent(appDriver)}%0A*WhatsApp:* ${encodeURIComponent(whatsapp)}`;
+    const msg = `Olá! Vim pelo anúncio da Club PRÓ+ e quero uma simulação de proteção veicular.%0A%0A*Nome:* ${encodeURIComponent(nome)}%0A*Veículo:* ${encodeURIComponent(veiculo)}%0A*Ano:* ${ano}%0A*Cidade:* ${encodeURIComponent(cidade)}%0A*Motorista de app:* ${encodeURIComponent(appDriver)}%0A*WhatsApp:* ${encodeURIComponent(whatsapp)}`;
 
     const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${msg}`;
+
+    // envia os dados pra planilha, sem travar a abertura do WhatsApp
+    if (SHEETS_WEBHOOK_URL) {
+      fetch(SHEETS_WEBHOOK_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams({
+          data_hora: new Date().toLocaleString('pt-BR'),
+          nome: nome,
+          whatsapp: whatsapp,
+          veiculo: veiculo,
+          ano: ano,
+          cidade: cidade,
+          motorista_app: appDriver
+        })
+      }).catch(() => {}); // não bloqueia o fluxo se falhar
+    }
 
     card.classList.add('hide-form');
     success.classList.add('show');
