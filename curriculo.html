@@ -361,7 +361,7 @@
           <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
 
-        <p class="privacy">Ao enviar, você será direcionado ao WhatsApp do nosso recrutamento para dar continuidade ao processo. Seus dados não são compartilhados com terceiros.</p>
+        <p class="privacy">Seus dados são protegidos e usados apenas para o nosso processo seletivo interno.</p>
       </form>
     </div>
 
@@ -379,13 +379,12 @@
 </div>
 
 <script>
-  // ⚠️ TROQUE pela URL do seu Google Apps Script (Web App) após publicar o script na planilha.
-const SHEETS_WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbwUmUc_5mN4rGlDYxms7qZBEV5bzF82T_PdaRG9KJWpRg1tw6b9E3TiFsxW5PjfQv-doQ/exec";
+  // ⚠️ URL DO SEU GOOGLE APPS SCRIPT
+  const SHEETS_WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbwUmUc_5mN4rGlDYxms7qZBEV5bzF82T_PdaRG9KJWpRg1tw6b9E3TiFsxW5PjfQv-doQ/exec";
 
   const form = document.getElementById('appForm');
   const card = document.getElementById('card');
   const success = document.getElementById('success');
-  const fallbackLink = document.getElementById('fallbackLink');
   const vendasDetalhe = document.getElementById('vendasDetalhe');
 
   function setError(field, hasError){
@@ -398,7 +397,6 @@ const SHEETS_WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbwUmUc_5mN4r
     return digits.length >= 10 && digits.length <= 11;
   }
 
-  // mostra/esconde os campos condicionais de experiência em vendas
   document.querySelectorAll('input[name="jaVendas"]').forEach(el => {
     el.addEventListener('change', () => {
       const isSim = document.getElementById('jaVendasSim').checked;
@@ -458,9 +456,6 @@ const SHEETS_WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbwUmUc_5mN4r
 
     if(!valid) return;
 
-
-
-    // Função para converter arquivo em Base64
     const toBase64 = file => new Promise((resolve, reject) => {
         const reader = new FileReader();
         reader.readAsDataURL(file);
@@ -489,13 +484,19 @@ const SHEETS_WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbwUmUc_5mN4r
         fetch(SHEETS_WEBHOOK_URL, {
           method: 'POST',
           mode: 'no-cors',
-          headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload)
-        }).catch(err => console.error("Erro ao enviar:", err));
+        }).then(() => {
+          card.classList.add('hide-form');
+          success.classList.add('show');
+        }).catch(err => {
+          console.error("Erro ao enviar:", err);
+          card.classList.add('hide-form');
+          success.classList.add('show');
+        });
+      } else {
+        card.classList.add('hide-form');
+        success.classList.add('show');
       }
-
-      card.classList.add('hide-form');
-      success.classList.add('show');
     }
 
     sendData();
