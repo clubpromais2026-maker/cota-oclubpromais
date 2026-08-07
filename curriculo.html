@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vagas Club PRÓ+ | Consultor de Vendas — Taubaté</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0A1F33;
+    --steel:#16324F;
+    --asphalt:#2B333A;
+    --amber:#FFC53D;
+    --amber-dark:#E6A800;
+    --guardrail:#F5F7FA;
+    --muted:#9FB3C8;
+    --signal:#34D399;
+    --danger:#FF6B6B;
+    --radius:14px;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:radial-gradient(1200px 600px at 50% -10%, #163a5c 0%, var(--ink) 55%);
+    color:var(--guardrail);
+    font-family:'Inter', sans-serif;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    padding:0 0 60px;
+    position:relative;
+    overflow-x:hidden;
+  }
+  body::before{
+    content:"";
+    position:absolute;
+    top:0; left:50%;
+    width:6px; height:100%;
+    transform:translateX(-50%);
+    background:repeating-linear-gradient(to bottom, var(--amber) 0px, var(--amber) 28px, transparent 28px, transparent 56px);
+    opacity:0.14;
+    animation:roll 1.6s linear infinite;
+    pointer-events:none;
+  }
+  @keyframes roll{from{background-position:0 0;} to{background-position:0 56px;}}
+  @media (prefers-reduced-motion: reduce){ body::before{animation:none;} }
+
+  .wrap{width:100%; max-width:480px; padding:36px 20px 0; position:relative; z-index:1;}
+
+  .logo{display:block; max-width:220px; width: 100%; height:auto; margin:0 auto 16px;}
+
+  .badge-row{display:flex; align-items:center; justify-content:center; gap:8px; margin-bottom:18px; flex-wrap:wrap;}
+  .badge{font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:var(--ink); background:var(--amber); padding:5px 10px; border-radius:999px; font-weight:700;}
+  .badge.outline{background:transparent; color:var(--muted); border:1px solid #2E4E70;}
+
+  .hero{text-align:center; margin-bottom:24px;}
+  .eyebrow{font-size:12px; letter-spacing:0.2em; text-transform:uppercase; color:var(--muted); margin:0 0 10px;}
+  h1{font-family:'Barlow Condensed', sans-serif; font-weight:800; font-size:clamp(28px, 7.5vw, 40px); line-height:1.08; letter-spacing:0.01em; margin:0 0 12px; color:var(--guardrail); text-transform:uppercase;}
+  h1 span{color:var(--amber);}
+  .sub{font-size:15px; line-height:1.55; color:var(--muted); max-width:380px; margin:0 auto;}
+
+  /* card da vaga */
+  .job-card{
+    background:linear-gradient(180deg, var(--steel) 0%, #142B44 100%);
+    border:1px solid #234465;
+    border-radius:var(--radius);
+    padding:22px;
+    margin-bottom:20px;
+  }
+  .job-card h2{
+    font-family:'Barlow Condensed', sans-serif;
+    font-weight:700; font-size:19px; text-transform:uppercase;
+    letter-spacing:0.02em; margin:0 0 4px; color:var(--guardrail);
+  }
+  .job-card .role-tag{
+    font-size:12px; color:var(--amber); font-weight:600;
+    text-transform:uppercase; letter-spacing:0.06em; margin:0 0 14px;
+  }
+  .perks{list-style:none; margin:0 0 18px; padding:0; display:grid; gap:10px;}
+  .perks li{
+    display:flex; align-items:flex-start; gap:9px;
+    font-size:13.5px; color:var(--guardrail); line-height:1.4;
+  }
+  .perks li svg{flex-shrink:0; margin-top:2px; width:15px; height:15px; color:var(--signal);}
+  
+  .commission-details {
+    background: rgba(10, 31, 51, 0.4);
+    border-radius: 10px;
+    padding: 15px;
+    margin-top: 15px;
+    border: 1px solid #2E4E70;
+  }
+  .commission-details p {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.5;
+    margin: 0 0 8px;
+  }
+  .commission-details p strong {
+    color: var(--amber);
+  }
+
+  /* formulário */
+  .card{
+    background:linear-gradient(180deg, var(--steel) 0%, #142B44 100%);
+    border:1px solid #234465; border-radius:var(--radius);
+    padding:26px 22px 24px;
+    box-shadow:0 20px 50px -20px rgba(0,0,0,0.6);
+  }
+  .card-title{font-family:'Barlow Condensed', sans-serif; font-weight:700; font-size:20px; letter-spacing:0.02em; text-transform:uppercase; color:var(--guardrail); margin:0 0 4px;}
+  .card-sub{font-size:13px; color:var(--muted); margin:0 0 20px;}
+
+  label{display:block; font-size:11px; letter-spacing:0.12em; text-transform:uppercase; color:var(--muted); font-weight:600; margin-bottom:6px;}
+  .field{margin-bottom:16px;}
+  input, select, textarea{
+    width:100%; background:var(--ink); border:1px solid #2E4E70; border-radius:10px;
+    padding:13px 14px; font-size:15px; color:var(--guardrail); font-family:'Inter', sans-serif;
+    transition:border-color .15s ease, box-shadow .15s ease;
+  }
+  input[type="file"] {
+    padding: 10px;
+    font-size: 13px;
+    cursor: pointer;
+  }
+  input[type="file"]::file-selector-button {
+    background: var(--steel);
+    color: var(--guardrail);
+    border: 1px solid #2E4E70;
+    padding: 5px 10px;
+    border-radius: 6px;
+    margin-right: 10px;
+    font-family: 'Inter', sans-serif;
+    cursor: pointer;
+  }
+  input[type="file"]::file-selector-button:hover {
+    background: #234465;
+  }
+  textarea{resize:vertical; min-height:70px; line-height:1.4;}
+  select{
+    appearance:none; -webkit-appearance:none;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='9' viewBox='0 0 14 9'><path d='M1 1l6 6 6-6' stroke='%239FB3C8' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+    background-repeat:no-repeat; background-position:right 14px center; padding-right:36px;
+  }
+  input::placeholder, textarea::placeholder{color:#5D7590;}
+  input:focus, select:focus, textarea:focus{outline:none; border-color:var(--amber); box-shadow:0 0 0 3px rgba(255,197,61,0.18);}
+  .row2{display:grid; grid-template-columns:1fr 1fr; gap:12px;}
+  .error{font-size:12px; color:var(--danger); margin-top:5px; display:none;}
+  .field.invalid input, .field.invalid select, .field.invalid textarea{border-color:var(--danger);}
+  .field.invalid .error{display:block;}
+
+  .toggle-field{margin-bottom:18px;}
+  .toggle-label{display:block; font-size:11px; letter-spacing:0.12em; text-transform:uppercase; color:var(--muted); font-weight:600; margin-bottom:8px;}
+  .toggle-options{display:grid; grid-template-columns:1fr 1fr; gap:10px;}
+  .toggle-option{position:relative;}
+  .toggle-option input{position:absolute; opacity:0; width:100%; height:100%; margin:0; cursor:pointer;}
+  .toggle-option .pill{
+    display:flex; align-items:center; justify-content:center; gap:8px;
+    border:1px solid #2E4E70; background:var(--ink); border-radius:10px; padding:12px 10px;
+    font-size:14px; font-weight:600; color:var(--muted); transition:all .15s ease;
+  }
+  .toggle-option .pill svg{width:16px; height:16px; flex-shrink:0;}
+  .toggle-option input:checked + .pill{border-color:var(--amber); background:rgba(255,197,61,0.12); color:var(--guardrail);}
+  .toggle-option input:focus-visible + .pill{box-shadow:0 0 0 3px rgba(255,197,61,0.25);}
+
+  .conditional{
+    display:none;
+    margin-top:2px;
+    padding-left:2px;
+  }
+  .conditional.show{display:block;}
+
+  button.submit{
+    width:100%; margin-top:6px; background:var(--amber); color:var(--ink); border:none;
+    border-radius:10px; padding:15px 18px; font-family:'Barlow Condensed', sans-serif;
+    font-size:19px; font-weight:700; letter-spacing:0.03em; text-transform:uppercase;
+    cursor:pointer; transition:transform .12s ease, background .15s ease;
+    display:flex; align-items:center; justify-content:center; gap:8px;
+  }
+  button.submit:hover{background:var(--amber-dark);}
+  button.submit:active{transform:scale(0.98);}
+  button.submit svg{width:18px; height:18px;}
+
+  .privacy{font-size:11px; color:var(--muted); text-align:center; margin-top:12px; line-height:1.5;}
+
+  .plate{margin-top:24px; display:flex; align-items:center; justify-content:center; gap:10px; font-size:11px; color:var(--muted); letter-spacing:0.05em;}
+  .plate .dot{width:5px; height:5px; border-radius:50%; background:var(--signal);}
+
+  .success{display:none; text-align:center; padding:30px 10px 6px;}
+  .success.show{display:block;}
+  .card.hide-form .form-content{display:none;}
+  .success-icon{width:52px; height:52px; border-radius:50%; background:rgba(52,211,153,0.15); display:flex; align-items:center; justify-content:center; margin:0 auto 16px;}
+  .success h2{font-family:'Barlow Condensed', sans-serif; text-transform:uppercase; font-size:22px; margin:0 0 8px;}
+  .success p{font-size:14px; color:var(--muted); margin:0;}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663657626561/gIRxujMTjhgtngqv.webp" alt="Club PRÓ+" class="logo">
+
+  <div class="badge-row">
+    <span class="badge">Vagas abertas</span>
+    <span class="badge outline">Base Taubaté</span>
+  </div>
+
+  <div class="hero">
+    <p class="eyebrow">Club PRÓ+ · Recrutamento</p>
+    <h1>Venha construir uma <span>carreira</span> em vendas com a gente</h1>
+    <p class="sub">Estamos com vagas abertas pra consultor de vendas na base de Taubaté. Preenche o formulário abaixo e nosso time te chama pra uma entrevista.</p>
+  </div>
+
+  <div class="job-card">
+    <p class="role-tag">Consultor de Vendas · PJ</p>
+    <h2>O que você ganha</h2>
+    <ul class="perks">
+      <li><svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Ganhos de R$ 220 a R$ 350 por contrato</li>
+      <li><svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Bônus extra de R$ 500,00 a partir de 5 vendas</li>
+      <li><svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Bônus de R$ 1.000,00 por 10 vendas</li>
+      <li><svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Recorrência mensal de 5% da carteira ativa</li>
+      <li><svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Campanhas e premiações variáveis por ciclo</li>
+    </ul>
+
+    <div class="commission-details">
+      <p><strong>Remuneração Agressiva:</strong> Receba em média <strong>R$ 220 a R$ 350</strong> por cada contrato fechado, variando conforme o veículo.</p>
+      <p><strong>Plano de Bônus:</strong> Comece a ganhar bônus extras com apenas 5 vendas (+R$ 500,00). Ao atingir 10 vendas, o bônus sobe para <strong>R$ 1.000,00</strong>, com escala progressiva até 100 vendas/mês.</p>
+      <p><strong>Recorrência:</strong> Mantenha 5% de ganho mensal sobre todos os clientes ativos da sua base.</p>
+    </div>
+  </div>
+
+  <div class="card" id="card">
+    <div class="form-content">
+      <p class="card-title">Quero me candidatar</p>
+      <p class="card-sub">Leva 2 minutos — nosso time entra em contato pra marcar a entrevista</p>
+
+      <form id="appForm" novalidate>
+
+        <div class="field" data-field="nome">
+          <label for="nome">Nome completo</label>
+          <input type="text" id="nome" placeholder="Seu nome completo" autocomplete="name">
+          <span class="error">Digite seu nome completo</span>
+        </div>
+
+        <div class="row2">
+          <div class="field" data-field="telefone">
+            <label for="telefone">Telefone</label>
+            <input type="tel" id="telefone" placeholder="(12) 9 9999-9999" autocomplete="tel" inputmode="numeric">
+            <span class="error">Digite um telefone válido</span>
+          </div>
+          <div class="field" data-field="idade">
+            <label for="idade">Idade</label>
+            <input type="number" id="idade" placeholder="Ex: 27" min="18" max="80">
+            <span class="error">Digite uma idade válida</span>
+          </div>
+        </div>
+
+        <div class="field" data-field="cidade">
+          <label for="cidade">Cidade</label>
+          <input type="text" id="cidade" placeholder="Ex: Taubaté" autocomplete="address-level2">
+          <span class="error">Digite sua cidade</span>
+        </div>
+
+        <div class="toggle-field" data-field="estadoCivil">
+          <span class="toggle-label">Estado civil</span>
+          <div class="toggle-options">
+            <label class="toggle-option">
+              <input type="radio" name="estadoCivil" value="Solteiro(a)">
+              <span class="pill">Solteiro(a)</span>
+            </label>
+            <label class="toggle-option">
+              <input type="radio" name="estadoCivil" value="Casado(a)">
+              <span class="pill">Casado(a)</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="toggle-field" data-field="veiculoProprio">
+          <span class="toggle-label">Possui veículo próprio?</span>
+          <div class="toggle-options">
+            <label class="toggle-option">
+              <input type="radio" name="veiculoProprio" value="Sim">
+              <span class="pill">Sim</span>
+            </label>
+            <label class="toggle-option">
+              <input type="radio" name="veiculoProprio" value="Não">
+              <span class="pill">Não</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="toggle-field" data-field="jaVendas">
+          <span class="toggle-label">Já trabalhou com vendas?</span>
+          <div class="toggle-options">
+            <label class="toggle-option">
+              <input type="radio" name="jaVendas" value="Sim" id="jaVendasSim">
+              <span class="pill">Sim</span>
+            </label>
+            <label class="toggle-option">
+              <input type="radio" name="jaVendas" value="Não" id="jaVendasNao">
+              <span class="pill">Não</span>
+            </label>
+          </div>
+
+          <div class="conditional" id="vendasDetalhe">
+            <div class="field" data-field="oQueFazia" style="margin-top:14px;">
+              <label for="oQueFazia">O que você fazia?</label>
+              <input type="text" id="oQueFazia" placeholder="Ex: vendedor externo, telemarketing...">
+              <span class="error">Conta rapidinho o que você fazia</span>
+            </div>
+            <div class="field" data-field="tempoEmpresa">
+              <label for="tempoEmpresa">Quanto tempo permaneceu na empresa?</label>
+              <input type="text" id="tempoEmpresa" placeholder="Ex: 1 ano e 6 meses">
+              <span class="error">Digite o tempo aproximado</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="toggle-field" data-field="conheceSegmento">
+          <span class="toggle-label">Conhece o segmento de proteção veicular?</span>
+          <div class="toggle-options">
+            <label class="toggle-option">
+              <input type="radio" name="conheceSegmento" value="Sim">
+              <span class="pill">Sim</span>
+            </label>
+            <label class="toggle-option">
+              <input type="radio" name="conheceSegmento" value="Não">
+              <span class="pill">Não</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="toggle-field" data-field="disponibilidadeExterna">
+          <span class="toggle-label">Tem disponibilidade pra trabalho externo (visitas e prospecção em campo)?</span>
+          <div class="toggle-options">
+            <label class="toggle-option">
+              <input type="radio" name="disponibilidadeExterna" value="Sim">
+              <span class="pill">Sim</span>
+            </label>
+            <label class="toggle-option">
+              <input type="radio" name="disponibilidadeExterna" value="Não">
+              <span class="pill">Não</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="field" data-field="motivacao">
+          <label for="motivacao">Por que você quer atuar em vendas?</label>
+          <textarea id="motivacao" placeholder="Conta um pouco sobre sua motivação..."></textarea>
+          <span class="error">Escreve uma breve resposta</span>
+        </div>
+
+        <div class="field" data-field="curriculo">
+          <label for="curriculo">Anexar Currículo (PDF ou Imagem)</label>
+          <input type="file" id="curriculo" accept=".pdf,image/*">
+          <span class="error">Por favor, selecione seu currículo</span>
+        </div>
+
+        <button type="submit" class="submit">
+          Quero me candidatar
+          <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+
+        <p class="privacy">Ao enviar, você será direcionado ao WhatsApp do nosso recrutamento para dar continuidade ao processo. Seus dados não são compartilhados com terceiros.</p>
+      </form>
+    </div>
+
+    <div class="success" id="success">
+      <div class="success-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#34D399" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <h2>Candidatura enviada!</h2>
+      <p>Parabéns! Em alguns instantes nossa equipe entrará em contato.</p>
+    </div>
+  </div>
+
+  <div class="plate"><span class="dot"></span> Processo seletivo Club PRÓ+ · Base Taubaté</div>
+
+</div>
+
+<script>
+  // ⚠️ TROQUE pela URL do seu Google Apps Script (Web App) após publicar o script na planilha.
+  const https://script.google.com/macros/s/AKfycbz4wllbYZE-vtKu6U8U7QeiyvNnJSyAC2W5DpAZKulkceblyrwreHbSaFi4JK-q2jUIvg/exec = "";
+
+  const form = document.getElementById('appForm');
+  const card = document.getElementById('card');
+  const success = document.getElementById('success');
+  const fallbackLink = document.getElementById('fallbackLink');
+  const vendasDetalhe = document.getElementById('vendasDetalhe');
+
+  function setError(field, hasError){
+    const el = form.querySelector(`[data-field="${field}"]`);
+    if(el) el.classList.toggle('invalid', hasError);
+  }
+
+  function validatePhone(v){
+    const digits = v.replace(/\D/g,'');
+    return digits.length >= 10 && digits.length <= 11;
+  }
+
+  // mostra/esconde os campos condicionais de experiência em vendas
+  document.querySelectorAll('input[name="jaVendas"]').forEach(el => {
+    el.addEventListener('change', () => {
+      const isSim = document.getElementById('jaVendasSim').checked;
+      vendasDetalhe.classList.toggle('show', isSim);
+      if(!isSim){
+        setError('oQueFazia', false);
+        setError('tempoEmpresa', false);
+      }
+    });
+  });
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+
+    const nome = document.getElementById('nome').value.trim();
+    const telefone = document.getElementById('telefone').value.trim();
+    const idade = document.getElementById('idade').value.trim();
+    const cidade = document.getElementById('cidade').value.trim();
+    const motivacao = document.getElementById('motivacao').value.trim();
+    const curriculoInput = document.getElementById('curriculo');
+    const curriculoFile = curriculoInput.files[0];
+
+    const getRadio = (name) => {
+      const el = form.querySelector(`input[name="${name}"]:checked`);
+      return el ? el.value : '';
+    };
+    const estadoCivil = getRadio('estadoCivil');
+    const veiculoProprio = getRadio('veiculoProprio');
+    const jaVendas = getRadio('jaVendas');
+    const conheceSegmento = getRadio('conheceSegmento');
+    const disponibilidadeExterna = getRadio('disponibilidadeExterna');
+
+    const oQueFazia = document.getElementById('oQueFazia').value.trim();
+    const tempoEmpresa = document.getElementById('tempoEmpresa').value.trim();
+
+    let valid = true;
+    setError('nome', nome.length < 3); if(nome.length < 3) valid = false;
+    setError('telefone', !validatePhone(telefone)); if(!validatePhone(telefone)) valid = false;
+    setError('idade', !idade || idade < 18 || idade > 80); if(!idade || idade < 18 || idade > 80) valid = false;
+    setError('cidade', cidade.length < 2); if(cidade.length < 2) valid = false;
+    setError('motivacao', motivacao.length < 5); if(motivacao.length < 5) valid = false;
+    setError('curriculo', !curriculoFile); if(!curriculoFile) valid = false;
+
+    [['estadoCivil', estadoCivil], ['veiculoProprio', veiculoProprio], ['jaVendas', jaVendas],
+     ['conheceSegmento', conheceSegmento], ['disponibilidadeExterna', disponibilidadeExterna]].forEach(([field, val]) => {
+      const el = document.querySelector(`.toggle-field[data-field="${field}"]`);
+      const invalid = !val;
+      if(invalid) valid = false;
+      if(el) el.style.outline = invalid ? '1px solid var(--danger)' : 'none';
+      if(el) el.style.borderRadius = '10px';
+    });
+
+    if(jaVendas === 'Sim'){
+      setError('oQueFazia', oQueFazia.length < 2); if(oQueFazia.length < 2) valid = false;
+      setError('tempoEmpresa', tempoEmpresa.length < 1); if(tempoEmpresa.length < 1) valid = false;
+    }
+
+    if(!valid) return;
+
+
+
+    // Função para converter arquivo em Base64
+    const toBase64 = file => new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = error => reject(error);
+    });
+
+    async function sendData() {
+      let fileData = null;
+      if (curriculoFile) {
+        fileData = await toBase64(curriculoFile);
+      }
+
+      const payload = {
+        data_hora: new Date().toLocaleString('pt-BR'),
+        nome, telefone, idade, cidade, estado_civil: estadoCivil,
+        veiculo_proprio: veiculoProprio, ja_vendas: jaVendas,
+        o_que_fazia: oQueFazia, tempo_empresa: tempoEmpresa,
+        conhece_segmento: conheceSegmento, disponibilidade_externa: disponibilidadeExterna,
+        motivacao,
+        arquivo_nome: curriculoFile ? curriculoFile.name : '',
+        arquivo_data: fileData
+      };
+
+      if (SHEETS_WEBHOOK_URL) {
+        fetch(SHEETS_WEBHOOK_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        }).catch(err => console.error("Erro ao enviar:", err));
+      }
+
+      card.classList.add('hide-form');
+      success.classList.add('show');
+    }
+
+    sendData();
+  });
+
+  document.querySelectorAll('.toggle-field input').forEach(el => {
+    el.addEventListener('change', (e) => {
+      const field = e.target.closest('.toggle-field');
+      if(field) field.style.outline = 'none';
+    });
+  });
+
+  ['nome','telefone','idade','cidade','motivacao','oQueFazia','tempoEmpresa','curriculo'].forEach(id => {
+    const el = document.getElementById(id);
+    if(!el) return;
+    el.addEventListener('input', () => {
+      const field = el.closest('.field');
+      if(field) field.classList.remove('invalid');
+    });
+  });
+</script>
+
+</body>
+</html>
