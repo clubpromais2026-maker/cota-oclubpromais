@@ -158,15 +158,17 @@
     <p class="role-tag">Consultor de Vendas · PJ</p>
     <h2>O que você ganha</h2>
     <ul class="perks">
-      <li><svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Ganhos de R$ 220 a R$ 350 por contrato</li>
-      <li><svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Bônus extra de R$ 500,00 a partir de 5 vendas</li>
-      <li><svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Bônus de R$ 1.000,00 por 10 vendas</li>
-      <li><svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Recorrência mensal de 5% da carteira ativa</li>
+      <li><svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Ganhos de R$ 220 a R$ 350 por contrato (conforme veículo)</li>
+      <li><svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Bônus extra de R$ 500,00 com apenas 5 vendas</li>
+      <li><svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Bônus de R$ 1.000,00 por 10 vendas (escala progressiva)</li>
+      <li><svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Recorrência mensal de 5% sobre clientes ativos</li>
+      <li><svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Campanhas variáveis de ciclo para ciclo</li>
     </ul>
 
     <div class="commission-details">
-      <p><strong>Remuneração Agressiva:</strong> Receba em média <strong>R$ 220 a R$ 350</strong> por cada contrato fechado.</p>
-      <p><strong>Plano de Bônus:</strong> Comece a ganhar bônus extras com apenas 5 vendas (+R$ 500,00). Ao atingir 10 vendas, o bônus sobe para <strong>R$ 1.000,00</strong>.</p>
+      <p><strong>Remuneração Agressiva:</strong> Receba em média <strong>R$ 220 a R$ 350</strong> por cada contrato fechado, a depender do veículo.</p>
+      <p><strong>Plano de Bônus:</strong> Além da comissão e campanhas, comece a ganhar bônus extras com apenas 5 vendas (+R$ 500,00). Ao atingir 10 vendas, o bônus sobe para <strong>R$ 1.000,00</strong>, com escala progressiva até 100 vendas no mês.</p>
+      <p><strong>Recorrência:</strong> Ganhe 5% mensalmente sobre todos os clientes ativos que você tiver na nossa base.</p>
     </div>
   </div>
 
@@ -179,19 +181,19 @@
         <div class="field" data-field="nome">
           <label for="nome">Nome completo</label>
           <input type="text" id="nome" placeholder="Seu nome completo">
-          <span class="error">Digite seu nome</span>
+          <span class="error">Digite seu nome completo</span>
         </div>
 
         <div class="row2">
           <div class="field" data-field="telefone">
             <label for="telefone">Telefone</label>
-            <input type="tel" id="telefone" placeholder="(12) 99999-9999">
-            <span class="error">Telefone inválido</span>
+            <input type="tel" id="telefone" placeholder="(12) 9 9999-9999">
+            <span class="error">Digite um telefone válido</span>
           </div>
           <div class="field" data-field="idade">
             <label for="idade">Idade</label>
             <input type="number" id="idade" placeholder="Ex: 27">
-            <span class="error">Idade inválida</span>
+            <span class="error">Digite uma idade válida</span>
           </div>
         </div>
 
@@ -224,13 +226,19 @@
             <label class="toggle-option"><input type="radio" name="jaVendas" value="Não" id="jaVendasNao"><span class="pill">Não</span></label>
           </div>
           <div class="conditional" id="vendasDetalhe">
-            <div class="field" data-field="oQueFazia"><label for="oQueFazia">O que fazia?</label><input type="text" id="oQueFazia"></div>
-            <div class="field" data-field="tempoEmpresa"><label for="tempoEmpresa">Quanto tempo?</label><input type="text" id="tempoEmpresa"></div>
+            <div class="field" data-field="oQueFazia">
+              <label for="oQueFazia">O que você fazia?</label>
+              <input type="text" id="oQueFazia" placeholder="Ex: vendedor externo, telemarketing...">
+            </div>
+            <div class="field" data-field="tempoEmpresa">
+              <label for="tempoEmpresa">Quanto tempo permaneceu na empresa?</label>
+              <input type="text" id="tempoEmpresa" placeholder="Ex: 1 ano e 6 meses">
+            </div>
           </div>
         </div>
 
         <div class="toggle-field" data-field="conheceSegmento">
-          <span class="toggle-label">Conhece o segmento?</span>
+          <span class="toggle-label">Conhece o segmento de proteção veicular?</span>
           <div class="toggle-options">
             <label class="toggle-option"><input type="radio" name="conheceSegmento" value="Sim"><span class="pill">Sim</span></label>
             <label class="toggle-option"><input type="radio" name="conheceSegmento" value="Não"><span class="pill">Não</span></label>
@@ -238,7 +246,7 @@
         </div>
 
         <div class="toggle-field" data-field="disponibilidadeExterna">
-          <span class="toggle-label">Disponibilidade externa?</span>
+          <span class="toggle-label">Tem disponibilidade pra trabalho externo (visitas e prospecção em campo)?</span>
           <div class="toggle-options">
             <label class="toggle-option"><input type="radio" name="disponibilidadeExterna" value="Sim"><span class="pill">Sim</span></label>
             <label class="toggle-option"><input type="radio" name="disponibilidadeExterna" value="Não"><span class="pill">Não</span></label>
@@ -246,9 +254,9 @@
         </div>
 
         <div class="field" data-field="motivacao">
-          <label for="motivacao">Motivação</label>
-          <textarea id="motivacao" placeholder="Por que vendas?"></textarea>
-          <span class="error">Escreva sua motivação</span>
+          <label for="motivacao">Por que você quer atuar em vendas?</label>
+          <textarea id="motivacao" placeholder="Conta um pouco sobre sua motivação..."></textarea>
+          <span class="error">Escreve uma breve resposta</span>
         </div>
 
         <div class="field" data-field="curriculo">
@@ -271,7 +279,6 @@
 </div>
 
 <script>
-  // ⚠️ URL DO SEU GOOGLE APPS SCRIPT
   const SHEETS_WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbwUmUc_5mN4rGlDYxms7qZBEV5bzF82T_PdaRG9KJWpRg1tw6b9E3TiFsxW5PjfQv-doQ/exec";
 
   const form = document.getElementById('appForm');
