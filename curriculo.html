@@ -1,368 +1,1790 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Vagas Club PRÓ+ | Consultor de Vendas — Taubaté</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --ink:#0A1F33;
-    --steel:#16324F;
-    --asphalt:#2B333A;
-    --amber:#FFC53D;
-    --amber-dark:#E6A800;
-    --guardrail:#F5F7FA;
-    --muted:#9FB3C8;
-    --signal:#34D399;
-    --danger:#FF6B6B;
-    --radius:14px;
-  }
-  *{box-sizing:border-box;}
-  html,body{margin:0;padding:0;}
-  body{
-    background:radial-gradient(1200px 600px at 50% -10%, #163a5c 0%, var(--ink) 55%);
-    color:var(--guardrail);
-    font-family:'Inter', sans-serif;
-    min-height:100vh;
-    display:flex;
-    justify-content:center;
-    padding:0 0 60px;
-    position:relative;
-    overflow-x:hidden;
-  }
-  body::before{
-    content:"";
-    position:absolute;
-    top:0; left:50%;
-    width:6px; height:100%;
-    transform:translateX(-50%);
-    background:repeating-linear-gradient(to bottom, var(--amber) 0px, var(--amber) 28px, transparent 28px, transparent 56px);
-    opacity:0.14;
-    animation:roll 1.6s linear infinite;
-    pointer-events:none;
-  }
-  @keyframes roll{from{background-position:0 0;} to{background-position:0 56px;}}
-  @media (prefers-reduced-motion: reduce){ body::before{animation:none;} }
+  <meta charset="UTF-8">
 
-  .wrap{width:100%; max-width:480px; padding:36px 20px 0; position:relative; z-index:1;}
-  .logo{display:block; max-width:220px; width: 100%; height:auto; margin:0 auto 16px;}
-  .badge-row{display:flex; align-items:center; justify-content:center; gap:8px; margin-bottom:18px; flex-wrap:wrap;}
-  .badge{font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:var(--ink); background:var(--amber); padding:5px 10px; border-radius:999px; font-weight:700;}
-  .badge.outline{background:transparent; color:var(--muted); border:1px solid #2E4E70;}
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
 
-  .hero{text-align:center; margin-bottom:24px;}
-  .eyebrow{font-size:12px; letter-spacing:0.2em; text-transform:uppercase; color:var(--muted); margin:0 0 10px;}
-  h1{font-family:'Barlow Condensed', sans-serif; font-weight:800; font-size:clamp(28px, 7.5vw, 40px); line-height:1.08; letter-spacing:0.01em; margin:0 0 12px; color:var(--guardrail); text-transform:uppercase;}
-  h1 span{color:var(--amber);}
-  .sub{font-size:15px; line-height:1.55; color:var(--muted); max-width:380px; margin:0 auto;}
+  <title>Vagas Club PRÓ+ | Consultor de Vendas — Taubaté</title>
 
-  .job-card{
-    background:linear-gradient(180deg, var(--steel) 0%, #142B44 100%);
-    border:1px solid #234465; border-radius:var(--radius);
-    padding:22px; margin-bottom:20px;
-  }
-  .job-card h2{
-    font-family:'Barlow Condensed', sans-serif; font-weight:700; font-size:19px; 
-    text-transform:uppercase; letter-spacing:0.02em; margin:0 0 4px; color:var(--guardrail);
-  }
-  .job-card .role-tag{
-    font-size:12px; color:var(--amber); font-weight:600;
-    text-transform:uppercase; letter-spacing:0.06em; margin:0 0 14px;
-  }
-  .perks{list-style:none; margin:0 0 18px; padding:0; display:grid; gap:10px;}
-  .perks li{
-    display:flex; align-items:flex-start; gap:9px;
-    font-size:13.5px; color:var(--guardrail); line-height:1.4;
-  }
-  .perks li svg{flex-shrink:0; margin-top:2px; width:15px; height:15px; color:var(--signal);}
-  
-  .commission-details {
-    background: rgba(10, 31, 51, 0.4); border-radius: 10px;
-    padding: 15px; margin-top: 15px; border: 1px solid #2E4E70;
-  }
-  .commission-details p { font-size: 13px; color: var(--muted); line-height: 1.5; margin: 0 0 8px; }
-  .commission-details p strong { color: var(--amber); }
+  <link
+    rel="preconnect"
+    href="https://fonts.googleapis.com"
+  >
 
-  .card{
-    background:linear-gradient(180deg, var(--steel) 0%, #142B44 100%);
-    border:1px solid #234465; border-radius:var(--radius);
-    padding:26px 22px 24px; box-shadow:0 20px 50px -20px rgba(0,0,0,0.6);
-  }
-  .card-title{font-family:'Barlow Condensed', sans-serif; font-weight:700; font-size:20px; letter-spacing:0.02em; text-transform:uppercase; color:var(--guardrail); margin:0 0 4px;}
-  .card-sub{font-size:13px; color:var(--muted); margin:0 0 20px;}
+  <link
+    href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  >
 
-  label{display:block; font-size:11px; letter-spacing:0.12em; text-transform:uppercase; color:var(--muted); font-weight:600; margin-bottom:6px;}
-  .field{margin-bottom:16px;}
-  input, select, textarea{
-    width:100%; background:var(--ink); border:1px solid #2E4E70; border-radius:10px;
-    padding:13px 14px; font-size:15px; color:var(--guardrail); font-family:'Inter', sans-serif;
-  }
-  textarea{resize:vertical; min-height:70px; line-height:1.4;}
-  select{ appearance:none; background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='9' viewBox='0 0 14 9'><path d='M1 1l6 6 6-6' stroke='%239FB3C8' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>"); background-repeat:no-repeat; background-position:right 14px center; padding-right:36px; }
-  .row2{display:grid; grid-template-columns:1fr 1fr; gap:12px;}
-  .error{font-size:12px; color:var(--danger); margin-top:5px; display:none;}
-  .field.invalid input, .field.invalid select, .field.invalid textarea{border-color:var(--danger);}
-  .field.invalid .error{display:block;}
+  <style>
 
-  .toggle-field{margin-bottom:18px;}
-  .toggle-label{display:block; font-size:11px; letter-spacing:0.12em; text-transform:uppercase; color:var(--muted); font-weight:600; margin-bottom:8px;}
-  .toggle-options{display:grid; grid-template-columns:1fr 1fr; gap:10px;}
-  .toggle-option{position:relative;}
-  .toggle-option input{position:absolute; opacity:0; width:100%; height:100%; cursor:pointer;}
-  .toggle-option .pill{
-    display:flex; align-items:center; justify-content:center; gap:8px;
-    border:1px solid #2E4E70; background:var(--ink); border-radius:10px; padding:12px 10px;
-    font-size:14px; font-weight:600; color:var(--muted);
-  }
-  .toggle-option input:checked + .pill{border-color:var(--amber); background:rgba(255,197,61,0.12); color:var(--guardrail);}
+    :root {
+      --ink: #0A1F33;
+      --steel: #16324F;
+      --asphalt: #2B333A;
+      --amber: #FFC53D;
+      --amber-dark: #E6A800;
+      --guardrail: #F5F7FA;
+      --muted: #9FB3C8;
+      --signal: #34D399;
+      --danger: #FF6B6B;
+      --radius: 14px;
+    }
 
-  .conditional{ display:none; margin-top:14px; }
-  .conditional.show{display:block;}
+    * {
+      box-sizing: border-box;
+    }
 
-  button.submit{
-    width:100%; margin-top:6px; background:var(--amber); color:var(--ink); border:none;
-    border-radius:10px; padding:15px 18px; font-family:'Barlow Condensed', sans-serif;
-    font-size:19px; font-weight:700; letter-spacing:0.03em; text-transform:uppercase;
-    cursor:pointer; display:flex; align-items:center; justify-content:center; gap:8px;
-  }
-  button.submit:disabled { opacity: 0.6; cursor: not-allowed; }
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+    }
 
-  .success{display:none; text-align:center; padding:30px 10px 6px;}
-  .success.show{display:block;}
-  .card.hide-form .form-content{display:none;}
-  .success-icon{width:52px; height:52px; border-radius:50%; background:rgba(52,211,153,0.15); display:flex; align-items:center; justify-content:center; margin:0 auto 16px;}
-  .plate{margin-top:24px; display:flex; align-items:center; justify-content:center; gap:10px; font-size:11px; color:var(--muted); letter-spacing:0.05em;}
-  .plate .dot{width:5px; height:5px; border-radius:50%; background:var(--signal);}
-</style>
+    body {
+      background:
+        radial-gradient(
+          1200px 600px at 50% -10%,
+          #163a5c 0%,
+          var(--ink) 55%
+        );
+
+      color: var(--guardrail);
+
+      font-family: "Inter", sans-serif;
+
+      min-height: 100vh;
+
+      display: flex;
+
+      justify-content: center;
+
+      padding: 0 0 60px;
+
+      position: relative;
+
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+
+      position: absolute;
+
+      top: 0;
+      left: 50%;
+
+      width: 6px;
+      height: 100%;
+
+      transform: translateX(-50%);
+
+      background:
+        repeating-linear-gradient(
+          to bottom,
+          var(--amber) 0px,
+          var(--amber) 28px,
+          transparent 28px,
+          transparent 56px
+        );
+
+      opacity: 0.14;
+
+      animation: roll 1.6s linear infinite;
+
+      pointer-events: none;
+    }
+
+    @keyframes roll {
+      from {
+        background-position: 0 0;
+      }
+
+      to {
+        background-position: 0 56px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+
+      body::before {
+        animation: none;
+      }
+
+    }
+
+    .wrap {
+      width: 100%;
+      max-width: 480px;
+
+      padding: 36px 20px 0;
+
+      position: relative;
+
+      z-index: 1;
+    }
+
+    .logo {
+      display: block;
+
+      max-width: 220px;
+
+      width: 100%;
+
+      height: auto;
+
+      margin: 0 auto 16px;
+    }
+
+    .badge-row {
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      gap: 8px;
+
+      margin-bottom: 18px;
+
+      flex-wrap: wrap;
+    }
+
+    .badge {
+      font-size: 11px;
+
+      letter-spacing: 0.14em;
+
+      text-transform: uppercase;
+
+      color: var(--ink);
+
+      background: var(--amber);
+
+      padding: 5px 10px;
+
+      border-radius: 999px;
+
+      font-weight: 700;
+    }
+
+    .badge.outline {
+      background: transparent;
+
+      color: var(--muted);
+
+      border: 1px solid #2E4E70;
+    }
+
+    .hero {
+      text-align: center;
+
+      margin-bottom: 24px;
+    }
+
+    .eyebrow {
+      font-size: 12px;
+
+      letter-spacing: 0.2em;
+
+      text-transform: uppercase;
+
+      color: var(--muted);
+
+      margin: 0 0 10px;
+    }
+
+    h1 {
+      font-family: "Barlow Condensed", sans-serif;
+
+      font-weight: 800;
+
+      font-size: clamp(28px, 7.5vw, 40px);
+
+      line-height: 1.08;
+
+      letter-spacing: 0.01em;
+
+      margin: 0 0 12px;
+
+      color: var(--guardrail);
+
+      text-transform: uppercase;
+    }
+
+    h1 span {
+      color: var(--amber);
+    }
+
+    .sub {
+      font-size: 15px;
+
+      line-height: 1.55;
+
+      color: var(--muted);
+
+      max-width: 380px;
+
+      margin: 0 auto;
+    }
+
+    .job-card {
+      background:
+        linear-gradient(
+          180deg,
+          var(--steel) 0%,
+          #142B44 100%
+        );
+
+      border: 1px solid #234465;
+
+      border-radius: var(--radius);
+
+      padding: 22px;
+
+      margin-bottom: 20px;
+    }
+
+    .job-card h2 {
+      font-family: "Barlow Condensed", sans-serif;
+
+      font-weight: 700;
+
+      font-size: 19px;
+
+      text-transform: uppercase;
+
+      letter-spacing: 0.02em;
+
+      margin: 0 0 4px;
+
+      color: var(--guardrail);
+    }
+
+    .job-card .role-tag {
+      font-size: 12px;
+
+      color: var(--amber);
+
+      font-weight: 600;
+
+      text-transform: uppercase;
+
+      letter-spacing: 0.06em;
+
+      margin: 0 0 14px;
+    }
+
+    .perks {
+      list-style: none;
+
+      margin: 0 0 18px;
+
+      padding: 0;
+
+      display: grid;
+
+      gap: 10px;
+    }
+
+    .perks li {
+      display: flex;
+
+      align-items: flex-start;
+
+      gap: 9px;
+
+      font-size: 13.5px;
+
+      color: var(--guardrail);
+
+      line-height: 1.4;
+    }
+
+    .perks li svg {
+      flex-shrink: 0;
+
+      margin-top: 2px;
+
+      width: 15px;
+
+      height: 15px;
+
+      color: var(--signal);
+    }
+
+    .commission-details {
+      background: rgba(10, 31, 51, 0.4);
+
+      border-radius: 10px;
+
+      padding: 15px;
+
+      margin-top: 15px;
+
+      border: 1px solid #2E4E70;
+    }
+
+    .commission-details p {
+      font-size: 13px;
+
+      color: var(--muted);
+
+      line-height: 1.5;
+
+      margin: 0 0 8px;
+    }
+
+    .commission-details p strong {
+      color: var(--amber);
+    }
+
+    .card {
+      background:
+        linear-gradient(
+          180deg,
+          var(--steel) 0%,
+          #142B44 100%
+        );
+
+      border: 1px solid #234465;
+
+      border-radius: var(--radius);
+
+      padding: 26px 22px 24px;
+
+      box-shadow:
+        0 20px 50px -20px rgba(0, 0, 0, 0.6);
+    }
+
+    .card-title {
+      font-family: "Barlow Condensed", sans-serif;
+
+      font-weight: 700;
+
+      font-size: 20px;
+
+      letter-spacing: 0.02em;
+
+      text-transform: uppercase;
+
+      color: var(--guardrail);
+
+      margin: 0 0 4px;
+    }
+
+    .card-sub {
+      font-size: 13px;
+
+      color: var(--muted);
+
+      margin: 0 0 20px;
+    }
+
+    label {
+      display: block;
+
+      font-size: 11px;
+
+      letter-spacing: 0.12em;
+
+      text-transform: uppercase;
+
+      color: var(--muted);
+
+      font-weight: 600;
+
+      margin-bottom: 6px;
+    }
+
+    .field {
+      margin-bottom: 16px;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+
+      background: var(--ink);
+
+      border: 1px solid #2E4E70;
+
+      border-radius: 10px;
+
+      padding: 13px 14px;
+
+      font-size: 15px;
+
+      color: var(--guardrail);
+
+      font-family: "Inter", sans-serif;
+    }
+
+    textarea {
+      resize: vertical;
+
+      min-height: 70px;
+
+      line-height: 1.4;
+    }
+
+    select {
+      appearance: none;
+
+      background-image:
+        url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='9' viewBox='0 0 14 9'><path d='M1 1l6 6 6-6' stroke='%239FB3C8' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+
+      background-repeat: no-repeat;
+
+      background-position: right 14px center;
+
+      padding-right: 36px;
+    }
+
+    .row2 {
+      display: grid;
+
+      grid-template-columns: 1fr 1fr;
+
+      gap: 12px;
+    }
+
+    .error {
+      font-size: 12px;
+
+      color: var(--danger);
+
+      margin-top: 5px;
+
+      display: none;
+    }
+
+    .field.invalid input,
+    .field.invalid select,
+    .field.invalid textarea {
+      border-color: var(--danger);
+    }
+
+    .field.invalid .error {
+      display: block;
+    }
+
+    .toggle-field {
+      margin-bottom: 18px;
+    }
+
+    .toggle-label {
+      display: block;
+
+      font-size: 11px;
+
+      letter-spacing: 0.12em;
+
+      text-transform: uppercase;
+
+      color: var(--muted);
+
+      font-weight: 600;
+
+      margin-bottom: 8px;
+    }
+
+    .toggle-options {
+      display: grid;
+
+      grid-template-columns: 1fr 1fr;
+
+      gap: 10px;
+    }
+
+    .toggle-option {
+      position: relative;
+    }
+
+    .toggle-option input {
+      position: absolute;
+
+      opacity: 0;
+
+      width: 100%;
+
+      height: 100%;
+
+      cursor: pointer;
+    }
+
+    .toggle-option .pill {
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      gap: 8px;
+
+      border: 1px solid #2E4E70;
+
+      background: var(--ink);
+
+      border-radius: 10px;
+
+      padding: 12px 10px;
+
+      font-size: 14px;
+
+      font-weight: 600;
+
+      color: var(--muted);
+    }
+
+    .toggle-option input:checked + .pill {
+      border-color: var(--amber);
+
+      background: rgba(255, 197, 61, 0.12);
+
+      color: var(--guardrail);
+    }
+
+    .conditional {
+      display: none;
+
+      margin-top: 14px;
+    }
+
+    .conditional.show {
+      display: block;
+    }
+
+    button.submit {
+      width: 100%;
+
+      margin-top: 6px;
+
+      background: var(--amber);
+
+      color: var(--ink);
+
+      border: none;
+
+      border-radius: 10px;
+
+      padding: 15px 18px;
+
+      font-family: "Barlow Condensed", sans-serif;
+
+      font-size: 19px;
+
+      font-weight: 700;
+
+      letter-spacing: 0.03em;
+
+      text-transform: uppercase;
+
+      cursor: pointer;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      gap: 8px;
+    }
+
+    button.submit:disabled {
+      opacity: 0.6;
+
+      cursor: not-allowed;
+    }
+
+    .success {
+      display: none;
+
+      text-align: center;
+
+      padding: 30px 10px 6px;
+    }
+
+    .success.show {
+      display: block;
+    }
+
+    .card.hide-form .form-content {
+      display: none;
+    }
+
+    .success-icon {
+      width: 52px;
+
+      height: 52px;
+
+      border-radius: 50%;
+
+      background: rgba(52, 211, 153, 0.15);
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      margin: 0 auto 16px;
+    }
+
+    .plate {
+      margin-top: 24px;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      gap: 10px;
+
+      font-size: 11px;
+
+      color: var(--muted);
+
+      letter-spacing: 0.05em;
+    }
+
+    .plate .dot {
+      width: 5px;
+
+      height: 5px;
+
+      border-radius: 50%;
+
+      background: var(--signal);
+    }
+
+  </style>
+
 </head>
+
+
 <body>
 
-<div class="wrap">
-  <img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663657626561/gIRxujMTjhgtngqv.webp" alt="Club PRÓ+" class="logo">
+  <div class="wrap">
 
-  <div class="badge-row">
-    <span class="badge">Vagas abertas</span>
-    <span class="badge outline">Base Taubaté</span>
-  </div>
+    <img
+      src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663657626561/gIRxujMTjhgtngqv.webp"
+      alt="Club PRÓ+"
+      class="logo"
+    >
 
-  <div class="hero">
-    <p class="eyebrow">Club PRÓ+ · Recrutamento</p>
-    <h1>Venha construir uma <span>carreira</span> em vendas com a gente</h1>
-    <p class="sub">Estamos com vagas abertas pra consultor de vendas na base de Taubaté. Preenche o formulário abaixo e nosso time te chama pra uma entrevista.</p>
-  </div>
 
-  <div class="job-card">
-    <p class="role-tag">Consultor de Vendas · PJ</p>
-    <h2>O que você ganha</h2>
-    <ul class="perks">
-      <li><svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Ganhos de R$ 220 a R$ 350 por contrato (conforme veículo)</li>
-      <li><svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Bônus extra de R$ 500,00 com apenas 5 vendas</li>
-      <li><svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Bônus de R$ 1.000,00 por 10 vendas (escala progressiva)</li>
-      <li><svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Recorrência mensal de 5% sobre clientes ativos</li>
-      <li><svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Campanhas variáveis de ciclo para ciclo</li>
-    </ul>
+    <div class="badge-row">
 
-    <div class="commission-details">
-      <p><strong>Remuneração Agressiva:</strong> Receba em média <strong>R$ 220 a R$ 350</strong> por cada contrato fechado, a depender do veículo.</p>
-      <p><strong>Plano de Bônus:</strong> Além da comissão e campanhas, comece a ganhar bônus extras com apenas 5 vendas (+R$ 500,00). Ao atingir 10 vendas, o bônus sobe para <strong>R$ 1.000,00</strong>, com escala progressiva até 100 vendas no mês.</p>
-      <p><strong>Recorrência:</strong> Ganhe 5% mensalmente sobre todos os clientes ativos que você tiver na nossa base.</p>
+      <span class="badge">
+        Vagas abertas
+      </span>
+
+      <span class="badge outline">
+        Base Taubaté
+      </span>
+
     </div>
-  </div>
 
-  <div class="card" id="card">
-    <div class="form-content">
-      <p class="card-title">Quero me candidatar</p>
-      <p class="card-sub">Leva 2 minutos — nosso time entra em contato em breve</p>
 
-      <form id="appForm" novalidate>
-        <div class="field" data-field="nome">
-          <label for="nome">Nome completo</label>
-          <input type="text" id="nome" placeholder="Seu nome completo">
-        </div>
+    <div class="hero">
 
-        <div class="row2">
-          <div class="field" data-field="telefone">
-            <label for="telefone">Telefone</label>
-            <input type="tel" id="telefone" placeholder="(12) 9 9999-9999">
+      <p class="eyebrow">
+        Club PRÓ+ · Recrutamento
+      </p>
+
+      <h1>
+        Venha construir uma
+        <span>carreira</span>
+        em vendas com a gente
+      </h1>
+
+      <p class="sub">
+        Estamos com vagas abertas pra consultor de vendas na base de Taubaté.
+        Preenche o formulário abaixo e nosso time te chama pra uma entrevista.
+      </p>
+
+    </div>
+
+
+    <div class="job-card">
+
+      <p class="role-tag">
+        Consultor de Vendas · PJ
+      </p>
+
+      <h2>
+        O que você ganha
+      </h2>
+
+      <ul class="perks">
+
+        <li>
+          <svg viewBox="0 0 24 24" fill="none">
+            <path
+              d="M20 6L9 17l-5-5"
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+
+          Ganhos de R$ 220 a R$ 350 por contrato
+          (conforme veículo)
+        </li>
+
+
+        <li>
+          <svg viewBox="0 0 24 24" fill="none">
+            <path
+              d="M20 6L9 17l-5-5"
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+
+          Bônus extra de R$ 500,00 com apenas 5 vendas
+        </li>
+
+
+        <li>
+          <svg viewBox="0 0 24 24" fill="none">
+            <path
+              d="M20 6L9 17l-5-5"
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+
+          Bônus de R$ 1.000,00 por 10 vendas
+          (escala progressiva)
+        </li>
+
+
+        <li>
+          <svg viewBox="0 0 24 24" fill="none">
+            <path
+              d="M20 6L9 17l-5-5"
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+
+          Recorrência mensal de 5% sobre clientes ativos
+        </li>
+
+
+        <li>
+          <svg viewBox="0 0 24 24" fill="none">
+            <path
+              d="M20 6L9 17l-5-5"
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+
+          Campanhas variáveis de ciclo para ciclo
+        </li>
+
+      </ul>
+
+
+      <div class="commission-details">
+
+        <p>
+          <strong>Remuneração Agressiva:</strong>
+          Receba em média
+          <strong>R$ 220 a R$ 350</strong>
+          por cada contrato fechado,
+          a depender do veículo.
+        </p>
+
+        <p>
+          <strong>Plano de Bônus:</strong>
+          Além da comissão e campanhas,
+          comece a ganhar bônus extras com apenas 5 vendas
+          (+R$ 500,00). Ao atingir 10 vendas,
+          o bônus sobe para <strong>R$ 1.000,00</strong>,
+          com escala progressiva até 100 vendas no mês.
+        </p>
+
+        <p>
+          <strong>Recorrência:</strong>
+          Ganhe 5% mensalmente sobre todos os clientes
+          ativos que você tiver na nossa base.
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <div class="card" id="card">
+
+      <div class="form-content">
+
+        <p class="card-title">
+          Quero me candidatar
+        </p>
+
+        <p class="card-sub">
+          Leva 2 minutos — nosso time entra em contato em breve
+        </p>
+
+
+        <form
+          id="appForm"
+          novalidate
+        >
+
+          <!-- NOME -->
+
+          <div
+            class="field"
+            data-field="nome"
+          >
+
+            <label for="nome">
+              Nome completo
+            </label>
+
+            <input
+              type="text"
+              id="nome"
+              placeholder="Seu nome completo"
+            >
+
           </div>
-          <div class="field" data-field="idade">
-            <label for="idade">Idade</label>
-            <input type="number" id="idade" placeholder="Ex: 27">
-          </div>
-        </div>
 
-        <div class="field" data-field="cidade">
-          <label for="cidade">Cidade</label>
-          <input type="text" id="cidade" placeholder="Ex: Taubaté">
-        </div>
 
-        <div class="toggle-field" data-field="estadoCivil">
-          <span class="toggle-label">Estado civil</span>
-          <div class="toggle-options">
-            <label class="toggle-option"><input type="radio" name="estadoCivil" value="Solteiro(a)"><span class="pill">Solteiro(a)</span></label>
-            <label class="toggle-option"><input type="radio" name="estadoCivil" value="Casado(a)"><span class="pill">Casado(a)</span></label>
-          </div>
-        </div>
+          <!-- TELEFONE + IDADE -->
 
-        <div class="toggle-field" data-field="veiculoProprio">
-          <span class="toggle-label">Possui veículo próprio?</span>
-          <div class="toggle-options">
-            <label class="toggle-option"><input type="radio" name="veiculoProprio" value="Sim"><span class="pill">Sim</span></label>
-            <label class="toggle-option"><input type="radio" name="veiculoProprio" value="Não"><span class="pill">Não</span></label>
-          </div>
-        </div>
+          <div class="row2">
 
-        <div class="toggle-field" data-field="jaVendas">
-          <span class="toggle-label">Já trabalhou com vendas?</span>
-          <div class="toggle-options">
-            <label class="toggle-option"><input type="radio" name="jaVendas" value="Sim" id="jaVendasSim"><span class="pill">Sim</span></label>
-            <label class="toggle-option"><input type="radio" name="jaVendas" value="Não" id="jaVendasNao"><span class="pill">Não</span></label>
-          </div>
-          <div class="conditional" id="vendasDetalhe">
-            <div class="field" data-field="oQueFazia">
-              <label for="oQueFazia">O que você fazia?</label>
-              <input type="text" id="oQueFazia" placeholder="Ex: vendedor externo, telemarketing...">
+            <div
+              class="field"
+              data-field="telefone"
+            >
+
+              <label for="telefone">
+                Telefone
+              </label>
+
+              <input
+                type="tel"
+                id="telefone"
+                placeholder="(12) 9 9999-9999"
+              >
+
             </div>
-            <div class="field" data-field="tempoEmpresa">
-              <label for="tempoEmpresa">Quanto tempo permaneceu na empresa?</label>
-              <input type="text" id="tempoEmpresa" placeholder="Ex: 1 ano e 6 meses">
+
+
+            <div
+              class="field"
+              data-field="idade"
+            >
+
+              <label for="idade">
+                Idade
+              </label>
+
+              <input
+                type="number"
+                id="idade"
+                placeholder="Ex: 27"
+              >
+
             </div>
+
           </div>
-        </div>
 
-        <div class="toggle-field" data-field="conheceSegmento">
-          <span class="toggle-label">Conhece o segmento de proteção veicular?</span>
-          <div class="toggle-options">
-            <label class="toggle-option"><input type="radio" name="conheceSegmento" value="Sim"><span class="pill">Sim</span></label>
-            <label class="toggle-option"><input type="radio" name="conheceSegmento" value="Não"><span class="pill">Não</span></label>
+
+          <!-- CIDADE -->
+
+          <div
+            class="field"
+            data-field="cidade"
+          >
+
+            <label for="cidade">
+              Cidade
+            </label>
+
+            <input
+              type="text"
+              id="cidade"
+              placeholder="Ex: Taubaté"
+            >
+
           </div>
-        </div>
 
-        <div class="toggle-field" data-field="disponibilidadeExterna">
-          <span class="toggle-label">Tem disponibilidade pra trabalho externo?</span>
-          <div class="toggle-options">
-            <label class="toggle-option"><input type="radio" name="disponibilidadeExterna" value="Sim"><span class="pill">Sim</span></label>
-            <label class="toggle-option"><input type="radio" name="disponibilidadeExterna" value="Não"><span class="pill">Não</span></label>
+
+          <!-- ESTADO CIVIL -->
+
+          <div
+            class="toggle-field"
+            data-field="estadoCivil"
+          >
+
+            <span class="toggle-label">
+              Estado civil
+            </span>
+
+            <div class="toggle-options">
+
+              <label class="toggle-option">
+
+                <input
+                  type="radio"
+                  name="estadoCivil"
+                  value="Solteiro(a)"
+                >
+
+                <span class="pill">
+                  Solteiro(a)
+                </span>
+
+              </label>
+
+
+              <label class="toggle-option">
+
+                <input
+                  type="radio"
+                  name="estadoCivil"
+                  value="Casado(a)"
+                >
+
+                <span class="pill">
+                  Casado(a)
+                </span>
+
+              </label>
+
+            </div>
+
           </div>
-        </div>
 
-        <div class="field" data-field="custoVida">
-          <label for="custoVida">Qual seu custo de vida hoje? (Quanto gasta para passar o mês e sobrar)</label>
-          <input type="text" id="custoVida" placeholder="Ex: R$ 2.500,00">
-        </div>
 
-        <div class="toggle-field" data-field="outroProcesso">
-          <span class="toggle-label">Está esperando ou participando de outro processo seletivo?</span>
-          <div class="toggle-options">
-            <label class="toggle-option"><input type="radio" name="outroProcesso" value="Sim"><span class="pill">Sim</span></label>
-            <label class="toggle-option"><input type="radio" name="outroProcesso" value="Não"><span class="pill">Não</span></label>
+          <!-- VEÍCULO -->
+
+          <div
+            class="toggle-field"
+            data-field="veiculoProprio"
+          >
+
+            <span class="toggle-label">
+              Possui veículo próprio?
+            </span>
+
+            <div class="toggle-options">
+
+              <label class="toggle-option">
+
+                <input
+                  type="radio"
+                  name="veiculoProprio"
+                  value="Sim"
+                >
+
+                <span class="pill">
+                  Sim
+                </span>
+
+              </label>
+
+
+              <label class="toggle-option">
+
+                <input
+                  type="radio"
+                  name="veiculoProprio"
+                  value="Não"
+                >
+
+                <span class="pill">
+                  Não
+                </span>
+
+              </label>
+
+            </div>
+
           </div>
-        </div>
 
-        <div class="toggle-field" data-field="dificuldadeContas">
-          <span class="toggle-label">Tem alguma dificuldade em fazer contas?</span>
-          <div class="toggle-options">
-            <label class="toggle-option"><input type="radio" name="dificuldadeContas" value="Sim"><span class="pill">Sim</span></label>
-            <label class="toggle-option"><input type="radio" name="dificuldadeContas" value="Não"><span class="pill">Não</span></label>
+
+          <!-- EXPERIÊNCIA EM VENDAS -->
+
+          <div
+            class="toggle-field"
+            data-field="jaVendas"
+          >
+
+            <span class="toggle-label">
+              Já trabalhou com vendas?
+            </span>
+
+            <div class="toggle-options">
+
+              <label class="toggle-option">
+
+                <input
+                  type="radio"
+                  name="jaVendas"
+                  value="Sim"
+                  id="jaVendasSim"
+                >
+
+                <span class="pill">
+                  Sim
+                </span>
+
+              </label>
+
+
+              <label class="toggle-option">
+
+                <input
+                  type="radio"
+                  name="jaVendas"
+                  value="Não"
+                  id="jaVendasNao"
+                >
+
+                <span class="pill">
+                  Não
+                </span>
+
+              </label>
+
+            </div>
+
+
+            <div
+              class="conditional"
+              id="vendasDetalhe"
+            >
+
+              <div
+                class="field"
+                data-field="oQueFazia"
+              >
+
+                <label for="oQueFazia">
+                  O que você fazia?
+                </label>
+
+                <input
+                  type="text"
+                  id="oQueFazia"
+                  placeholder="Ex: vendedor externo, telemarketing..."
+                >
+
+              </div>
+
+
+              <div
+                class="field"
+                data-field="tempoEmpresa"
+              >
+
+                <label for="tempoEmpresa">
+                  Quanto tempo permaneceu na empresa?
+                </label>
+
+                <input
+                  type="text"
+                  id="tempoEmpresa"
+                  placeholder="Ex: 1 ano e 6 meses"
+                >
+
+              </div>
+
+            </div>
+
           </div>
-        </div>
 
-        <div class="toggle-field" data-field="dificuldadeConversar">
-          <span class="toggle-label">Tem alguma dificuldade em conversar com pessoas?</span>
-          <div class="toggle-options">
-            <label class="toggle-option"><input type="radio" name="dificuldadeConversar" value="Sim"><span class="pill">Sim</span></label>
-            <label class="toggle-option"><input type="radio" name="dificuldadeConversar" value="Não"><span class="pill">Não</span></label>
+
+          <!-- SEGMENTO -->
+
+          <div
+            class="toggle-field"
+            data-field="conheceSegmento"
+          >
+
+            <span class="toggle-label">
+              Conhece o segmento de proteção veicular?
+            </span>
+
+            <div class="toggle-options">
+
+              <label class="toggle-option">
+
+                <input
+                  type="radio"
+                  name="conheceSegmento"
+                  value="Sim"
+                >
+
+                <span class="pill">
+                  Sim
+                </span>
+
+              </label>
+
+
+              <label class="toggle-option">
+
+                <input
+                  type="radio"
+                  name="conheceSegmento"
+                  value="Não"
+                >
+
+                <span class="pill">
+                  Não
+                </span>
+
+              </label>
+
+            </div>
+
           </div>
+
+
+          <!-- TRABALHO EXTERNO -->
+
+          <div
+            class="toggle-field"
+            data-field="disponibilidadeExterna"
+          >
+
+            <span class="toggle-label">
+              Tem disponibilidade pra trabalho externo?
+            </span>
+
+            <div class="toggle-options">
+
+              <label class="toggle-option">
+
+                <input
+                  type="radio"
+                  name="disponibilidadeExterna"
+                  value="Sim"
+                >
+
+                <span class="pill">
+                  Sim
+                </span>
+
+              </label>
+
+
+              <label class="toggle-option">
+
+                <input
+                  type="radio"
+                  name="disponibilidadeExterna"
+                  value="Não"
+                >
+
+                <span class="pill">
+                  Não
+                </span>
+
+              </label>
+
+            </div>
+
+          </div>
+
+
+          <!-- CUSTO DE VIDA -->
+
+          <div
+            class="field"
+            data-field="custoVida"
+          >
+
+            <label for="custoVida">
+              Qual seu custo de vida hoje?
+              (Quanto gasta para passar o mês e sobrar)
+            </label>
+
+            <input
+              type="text"
+              id="custoVida"
+              placeholder="Ex: R$ 2.500,00"
+            >
+
+          </div>
+
+
+          <!-- OUTRO PROCESSO -->
+
+          <div
+            class="toggle-field"
+            data-field="outroProcesso"
+          >
+
+            <span class="toggle-label">
+              Está esperando ou participando de outro processo seletivo?
+            </span>
+
+            <div class="toggle-options">
+
+              <label class="toggle-option">
+
+                <input
+                  type="radio"
+                  name="outroProcesso"
+                  value="Sim"
+                >
+
+                <span class="pill">
+                  Sim
+                </span>
+
+              </label>
+
+
+              <label class="toggle-option">
+
+                <input
+                  type="radio"
+                  name="outroProcesso"
+                  value="Não"
+                >
+
+                <span class="pill">
+                  Não
+                </span>
+
+              </label>
+
+            </div>
+
+          </div>
+
+
+          <!-- DIFICULDADE CONTAS -->
+
+          <div
+            class="toggle-field"
+            data-field="dificuldadeContas"
+          >
+
+            <span class="toggle-label">
+              Tem alguma dificuldade em fazer contas?
+            </span>
+
+            <div class="toggle-options">
+
+              <label class="toggle-option">
+
+                <input
+                  type="radio"
+                  name="dificuldadeContas"
+                  value="Sim"
+                >
+
+                <span class="pill">
+                  Sim
+                </span>
+
+              </label>
+
+
+              <label class="toggle-option">
+
+                <input
+                  type="radio"
+                  name="dificuldadeContas"
+                  value="Não"
+                >
+
+                <span class="pill">
+                  Não
+                </span>
+
+              </label>
+
+            </div>
+
+          </div>
+
+
+          <!-- DIFICULDADE CONVERSAR -->
+
+          <div
+            class="toggle-field"
+            data-field="dificuldadeConversar"
+          >
+
+            <span class="toggle-label">
+              Tem alguma dificuldade em conversar com pessoas?
+            </span>
+
+            <div class="toggle-options">
+
+              <label class="toggle-option">
+
+                <input
+                  type="radio"
+                  name="dificuldadeConversar"
+                  value="Sim"
+                >
+
+                <span class="pill">
+                  Sim
+                </span>
+
+              </label>
+
+
+              <label class="toggle-option">
+
+                <input
+                  type="radio"
+                  name="dificuldadeConversar"
+                  value="Não"
+                >
+
+                <span class="pill">
+                  Não
+                </span>
+
+              </label>
+
+            </div>
+
+          </div>
+
+
+          <!-- MOTIVAÇÃO -->
+
+          <div
+            class="field"
+            data-field="motivacao"
+          >
+
+            <label for="motivacao">
+              Por que você quer atuar em vendas?
+            </label>
+
+            <textarea
+              id="motivacao"
+              placeholder="Conta um pouco sobre sua motivação..."
+            ></textarea>
+
+          </div>
+
+
+          <!-- BOTÃO -->
+
+          <button
+            type="submit"
+            class="submit"
+            id="btnSubmit"
+          >
+            Quero me candidatar
+          </button>
+
+        </form>
+
+      </div>
+
+
+      <!-- SUCESSO -->
+
+      <div
+        class="success"
+        id="success"
+      >
+
+        <div class="success-icon">
+
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+          >
+
+            <path
+              d="M20 6L9 17l-5-5"
+              stroke="#34D399"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+
+          </svg>
+
         </div>
 
-        <div class="field" data-field="motivacao">
-          <label for="motivacao">Por que você quer atuar em vendas?</label>
-          <textarea id="motivacao" placeholder="Conta um pouco sobre sua motivação..."></textarea>
-        </div>
 
-        <button type="submit" class="submit" id="btnSubmit">Quero me candidatar</button>
-      </form>
+        <h2>
+          Candidatura enviada!
+        </h2>
+
+
+        <p>
+          Parabéns! Em alguns instantes nossa equipe entrará em contato,
+          tenha uma cópia de seu currículo, pois será solicitado por nossa equipe.
+        </p>
+
+      </div>
+
     </div>
 
-    <div class="success" id="success">
-      <div class="success-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#34D399" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-      <h2>Candidatura enviada!</h2>
-      <p>Parabéns! Em alguns instantes nossa equipe entrará em contato, tenha uma cópia de seu currículo, pois será solicitado por nossa equipe.</p>
+
+    <div class="plate">
+
+      <span class="dot"></span>
+
+      Processo seletivo Club PRÓ+ · Base Taubaté
+
     </div>
+
   </div>
-  <div class="plate"><span class="dot"></span> Processo seletivo Club PRÓ+ · Base Taubaté</div>
-</div>
 
-<script>
-  // ⚠️ URL DO SEU GOOGLE APPS SCRIPT
-  const SHEETS_WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbwUmUc_5mN4rGlDYxms7qZBEV5bzF82T_PdaRG9KJWpRg1tw6b9E3TiFsxW5PjfQv-doQ/exec";
 
-  const form = document.getElementById('appForm');
-  const btnSubmit = document.getElementById('btnSubmit');
-  const vendasDetalhe = document.getElementById('vendasDetalhe');
+  <!-- ==========================================================
+       JAVASCRIPT
+       ========================================================== -->
 
-  document.querySelectorAll('input[name="jaVendas"]').forEach(el => {
-    el.addEventListener('change', () => {
-      vendasDetalhe.classList.toggle('show', document.getElementById('jaVendasSim').checked);
-    });
-  });
+  <script>
 
-  form.addEventListener('submit', async function(e){
-    e.preventDefault();
-    
-    const getVal = id => document.getElementById(id).value.trim();
-    const getRadio = name => {
-      const el = form.querySelector(`input[name="${name}"]:checked`);
-      return el ? el.value : '';
-    };
+    // ==========================================================
+    // URL DO SEU GOOGLE APPS SCRIPT
+    // ==========================================================
 
-    const nome = getVal('nome');
-    const telefone = getVal('telefone');
-    
-    if(!nome || !telefone) {
-      alert("Por favor, preencha pelo menos nome e telefone.");
-      return;
-    }
+    const SHEETS_WEBHOOK_URL =
+      "https://script.google.com/macros/s/AKfycbwgZUm_CLnqB-XOV7pYgcE3yFAAxQrOoGfA3wArXSmaE-GQm_wObPDCziMMcRAgq_p_JA/exec";
 
-    btnSubmit.disabled = true;
-    btnSubmit.innerText = "Enviando...";
 
-    const params = new URLSearchParams();
-    params.append('nome', nome);
-    params.append('telefone', telefone);
-    params.append('idade', getVal('idade'));
-    params.append('cidade', getVal('cidade'));
-    params.append('estado_civil', getRadio('estadoCivil'));
-    params.append('veiculo_proprio', getRadio('veiculoProprio'));
-    params.append('ja_vendas', getRadio('jaVendas'));
-    params.append('o_que_fazia', getVal('oQueFazia'));
-    params.append('tempo_empresa', getVal('tempoEmpresa'));
-    params.append('conhece_segmento', getRadio('conheceSegmento'));
-    params.append('disponibilidade_externa', getRadio('disponibilidadeExterna'));
-    params.append('custo_vida', getVal('custoVida'));
-    params.append('outro_processo', getRadio('outroProcesso'));
-    params.append('dificuldade_contas', getRadio('dificuldadeContas'));
-    params.append('dificuldade_conversar', getRadio('dificuldadeConversar'));
-    params.append('motivacao', getVal('motivacao'));
+    // ==========================================================
+    // ELEMENTOS
+    // ==========================================================
 
-    try {
-      await fetch(SHEETS_WEBHOOK_URL, {
-        method: 'POST',
-        mode: 'no-cors',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: params.toString()
+    const form =
+      document.getElementById("appForm");
+
+    const btnSubmit =
+      document.getElementById("btnSubmit");
+
+    const vendasDetalhe =
+      document.getElementById("vendasDetalhe");
+
+
+    // ==========================================================
+    // MOSTRA OS CAMPOS DE EXPERIÊNCIA EM VENDAS
+    // ==========================================================
+
+    document
+      .querySelectorAll('input[name="jaVendas"]')
+      .forEach(function(el) {
+
+        el.addEventListener("change", function() {
+
+          const jaVendasSim =
+            document.getElementById("jaVendasSim").checked;
+
+          vendasDetalhe.classList.toggle(
+            "show",
+            jaVendasSim
+          );
+
+        });
+
       });
-      document.getElementById('card').classList.add('hide-form');
-      document.getElementById('success').classList.add('show');
-    } catch (err) {
-      console.error(err);
-      alert("Erro ao enviar. Tente novamente.");
-      btnSubmit.disabled = false;
-      btnSubmit.innerText = "Quero me candidatar";
-    }
-  });
-</script>
+
+
+    // ==========================================================
+    // ENVIO DO FORMULÁRIO
+    // ==========================================================
+
+    form.addEventListener(
+      "submit",
+      async function(e) {
+
+        e.preventDefault();
+
+
+        // ======================================================
+        // PEGA VALOR DOS CAMPOS
+        // ======================================================
+
+        function getVal(id) {
+
+          const element =
+            document.getElementById(id);
+
+          if (!element) {
+            return "";
+          }
+
+          return element.value.trim();
+
+        }
+
+
+        // ======================================================
+        // PEGA VALOR DOS RADIO BUTTONS
+        // ======================================================
+
+        function getRadio(name) {
+
+          const element =
+            form.querySelector(
+              'input[name="' + name + '"]:checked'
+            );
+
+          return element
+            ? element.value
+            : "";
+
+        }
+
+
+        // ======================================================
+        // CAMPOS PRINCIPAIS
+        // ======================================================
+
+        const nome =
+          getVal("nome");
+
+        const telefone =
+          getVal("telefone");
+
+
+        // ======================================================
+        // VALIDAÇÃO
+        // ======================================================
+
+        if (!nome) {
+
+          alert(
+            "Por favor, preencha seu nome."
+          );
+
+          return;
+
+        }
+
+
+        if (!telefone) {
+
+          alert(
+            "Por favor, preencha seu telefone."
+          );
+
+          return;
+
+        }
+
+
+        // ======================================================
+        // DESABILITA BOTÃO
+        // ======================================================
+
+        btnSubmit.disabled = true;
+
+        btnSubmit.innerText =
+          "Enviando...";
+
+
+        // ======================================================
+        // MONTA DADOS
+        // ======================================================
+
+        const params =
+          new URLSearchParams();
+
+
+        params.append(
+          "nome",
+          nome
+        );
+
+
+        params.append(
+          "telefone",
+          telefone
+        );
+
+
+        params.append(
+          "idade",
+          getVal("idade")
+        );
+
+
+        params.append(
+          "cidade",
+          getVal("cidade")
+        );
+
+
+        params.append(
+          "estado_civil",
+          getRadio("estadoCivil")
+        );
+
+
+        params.append(
+          "veiculo_proprio",
+          getRadio("veiculoProprio")
+        );
+
+
+        params.append(
+          "ja_vendas",
+          getRadio("jaVendas")
+        );
+
+
+        params.append(
+          "o_que_fazia",
+          getVal("oQueFazia")
+        );
+
+
+        params.append(
+          "tempo_empresa",
+          getVal("tempoEmpresa")
+        );
+
+
+        params.append(
+          "conhece_segmento",
+          getRadio("conheceSegmento")
+        );
+
+
+        params.append(
+          "disponibilidade_externa",
+          getRadio("disponibilidadeExterna")
+        );
+
+
+        params.append(
+          "custo_vida",
+          getVal("custoVida")
+        );
+
+
+        params.append(
+          "outro_processo",
+          getRadio("outroProcesso")
+        );
+
+
+        params.append(
+          "dificuldade_contas",
+          getRadio("dificuldadeContas")
+        );
+
+
+        params.append(
+          "dificuldade_conversar",
+          getRadio("dificuldadeConversar")
+        );
+
+
+        params.append(
+          "motivacao",
+          getVal("motivacao")
+        );
+
+
+        // ======================================================
+        // ENVIA PARA GOOGLE APPS SCRIPT
+        // ======================================================
+
+        try {
+
+          await fetch(
+            SHEETS_WEBHOOK_URL,
+            {
+              method: "POST",
+
+              mode: "no-cors",
+
+              headers: {
+                "Content-Type":
+                  "application/x-www-form-urlencoded;charset=UTF-8"
+              },
+
+              body:
+                params.toString()
+            }
+          );
+
+
+          // ====================================================
+          // MOSTRA SUCESSO
+          // ====================================================
+
+          document
+            .getElementById("card")
+            .classList.add("hide-form");
+
+
+          document
+            .getElementById("success")
+            .classList.add("show");
+
+
+        } catch (error) {
+
+          // ====================================================
+          // ERRO
+          // ====================================================
+
+          console.error(
+            "Erro ao enviar candidatura:",
+            error
+          );
+
+
+          alert(
+            "Erro ao enviar a candidatura. " +
+            "Tente novamente."
+          );
+
+
+          btnSubmit.disabled =
+            false;
+
+
+          btnSubmit.innerText =
+            "Quero me candidatar";
+
+        }
+
+      }
+    );
+
+  </script>
+
 </body>
+
 </html>
