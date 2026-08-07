@@ -99,7 +99,6 @@
     width:100%; background:var(--ink); border:1px solid #2E4E70; border-radius:10px;
     padding:13px 14px; font-size:15px; color:var(--guardrail); font-family:'Inter', sans-serif;
   }
-  input[type="file"] { padding: 10px; font-size: 13px; cursor: pointer; color: var(--muted); }
   textarea{resize:vertical; min-height:70px; line-height:1.4;}
   select{ appearance:none; background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='9' viewBox='0 0 14 9'><path d='M1 1l6 6 6-6' stroke='%239FB3C8' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>"); background-repeat:no-repeat; background-position:right 14px center; padding-right:36px; }
   .row2{display:grid; grid-template-columns:1fr 1fr; gap:12px;}
@@ -181,26 +180,22 @@
         <div class="field" data-field="nome">
           <label for="nome">Nome completo</label>
           <input type="text" id="nome" placeholder="Seu nome completo">
-          <span class="error">Digite seu nome completo</span>
         </div>
 
         <div class="row2">
           <div class="field" data-field="telefone">
             <label for="telefone">Telefone</label>
             <input type="tel" id="telefone" placeholder="(12) 9 9999-9999">
-            <span class="error">Digite um telefone válido</span>
           </div>
           <div class="field" data-field="idade">
             <label for="idade">Idade</label>
             <input type="number" id="idade" placeholder="Ex: 27">
-            <span class="error">Digite uma idade válida</span>
           </div>
         </div>
 
         <div class="field" data-field="cidade">
           <label for="cidade">Cidade</label>
           <input type="text" id="cidade" placeholder="Ex: Taubaté">
-          <span class="error">Digite sua cidade</span>
         </div>
 
         <div class="toggle-field" data-field="estadoCivil">
@@ -246,23 +241,45 @@
         </div>
 
         <div class="toggle-field" data-field="disponibilidadeExterna">
-          <span class="toggle-label">Tem disponibilidade pra trabalho externo (visitas e prospecção em campo)?</span>
+          <span class="toggle-label">Tem disponibilidade pra trabalho externo?</span>
           <div class="toggle-options">
             <label class="toggle-option"><input type="radio" name="disponibilidadeExterna" value="Sim"><span class="pill">Sim</span></label>
             <label class="toggle-option"><input type="radio" name="disponibilidadeExterna" value="Não"><span class="pill">Não</span></label>
           </div>
         </div>
 
+        <div class="field" data-field="custoVida">
+          <label for="custoVida">Qual seu custo de vida hoje? (Quanto gasta para passar o mês e sobrar)</label>
+          <input type="text" id="custoVida" placeholder="Ex: R$ 2.500,00">
+        </div>
+
+        <div class="toggle-field" data-field="outroProcesso">
+          <span class="toggle-label">Está esperando ou participando de outro processo seletivo?</span>
+          <div class="toggle-options">
+            <label class="toggle-option"><input type="radio" name="outroProcesso" value="Sim"><span class="pill">Sim</span></label>
+            <label class="toggle-option"><input type="radio" name="outroProcesso" value="Não"><span class="pill">Não</span></label>
+          </div>
+        </div>
+
+        <div class="toggle-field" data-field="dificuldadeContas">
+          <span class="toggle-label">Tem alguma dificuldade em fazer contas?</span>
+          <div class="toggle-options">
+            <label class="toggle-option"><input type="radio" name="dificuldadeContas" value="Sim"><span class="pill">Sim</span></label>
+            <label class="toggle-option"><input type="radio" name="dificuldadeContas" value="Não"><span class="pill">Não</span></label>
+          </div>
+        </div>
+
+        <div class="toggle-field" data-field="dificuldadeConversar">
+          <span class="toggle-label">Tem alguma dificuldade em conversar com pessoas?</span>
+          <div class="toggle-options">
+            <label class="toggle-option"><input type="radio" name="dificuldadeConversar" value="Sim"><span class="pill">Sim</span></label>
+            <label class="toggle-option"><input type="radio" name="dificuldadeConversar" value="Não"><span class="pill">Não</span></label>
+          </div>
+        </div>
+
         <div class="field" data-field="motivacao">
           <label for="motivacao">Por que você quer atuar em vendas?</label>
           <textarea id="motivacao" placeholder="Conta um pouco sobre sua motivação..."></textarea>
-          <span class="error">Escreve uma breve resposta</span>
-        </div>
-
-        <div class="field" data-field="curriculo">
-          <label for="curriculo">Anexar Currículo (PDF, Word, Imagem ou TXT)</label>
-          <input type="file" id="curriculo" accept=".pdf,.doc,.docx,.txt,image/*">
-          <span class="error">Anexe seu currículo</span>
         </div>
 
         <button type="submit" class="submit" id="btnSubmit">Quero me candidatar</button>
@@ -272,13 +289,14 @@
     <div class="success" id="success">
       <div class="success-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#34D399" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
       <h2>Candidatura enviada!</h2>
-      <p>Parabéns! Em alguns instantes nossa equipe entrará em contato.</p>
+      <p>Parabéns! Em alguns instantes nossa equipe entrará em contato, tenha uma cópia de seu currículo, pois será solicitado por nossa equipe.</p>
     </div>
   </div>
   <div class="plate"><span class="dot"></span> Processo seletivo Club PRÓ+ · Base Taubaté</div>
 </div>
 
 <script>
+  // ⚠️ URL DO SEU GOOGLE APPS SCRIPT
   const SHEETS_WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbwUmUc_5mN4rGlDYxms7qZBEV5bzF82T_PdaRG9KJWpRg1tw6b9E3TiFsxW5PjfQv-doQ/exec";
 
   const form = document.getElementById('appForm');
@@ -302,50 +320,48 @@
 
     const nome = getVal('nome');
     const telefone = getVal('telefone');
-    const idade = getVal('idade');
-    const cidade = getVal('cidade');
-    const motivacao = getVal('motivacao');
-    const fileInput = document.getElementById('curriculo');
     
-    if(!nome || !telefone || !idade || !cidade || !motivacao || !fileInput.files[0]) {
-      alert("Por favor, preencha todos os campos e anexe o currículo.");
+    if(!nome || !telefone) {
+      alert("Por favor, preencha pelo menos nome e telefone.");
       return;
     }
 
     btnSubmit.disabled = true;
     btnSubmit.innerText = "Enviando...";
 
-    const reader = new FileReader();
-    reader.readAsDataURL(fileInput.files[0]);
-    reader.onload = async () => {
-      const payload = {
-        nome, telefone, idade, cidade, motivacao,
-        estado_civil: getRadio('estadoCivil'),
-        veiculo_proprio: getRadio('veiculoProprio'),
-        ja_vendas: getRadio('jaVendas'),
-        o_que_fazia: getVal('oQueFazia'),
-        tempo_empresa: getVal('tempoEmpresa'),
-        conhece_segmento: getRadio('conheceSegmento'),
-        disponibilidade_externa: getRadio('disponibilidadeExterna'),
-        arquivo_nome: fileInput.files[0].name,
-        arquivo_data: reader.result
-      };
+    const params = new URLSearchParams();
+    params.append('nome', nome);
+    params.append('telefone', telefone);
+    params.append('idade', getVal('idade'));
+    params.append('cidade', getVal('cidade'));
+    params.append('estado_civil', getRadio('estadoCivil'));
+    params.append('veiculo_proprio', getRadio('veiculoProprio'));
+    params.append('ja_vendas', getRadio('jaVendas'));
+    params.append('o_que_fazia', getVal('oQueFazia'));
+    params.append('tempo_empresa', getVal('tempoEmpresa'));
+    params.append('conhece_segmento', getRadio('conheceSegmento'));
+    params.append('disponibilidade_externa', getRadio('disponibilidadeExterna'));
+    params.append('custo_vida', getVal('custoVida'));
+    params.append('outro_processo', getRadio('outroProcesso'));
+    params.append('dificuldade_contas', getRadio('dificuldadeContas'));
+    params.append('dificuldade_conversar', getRadio('dificuldadeConversar'));
+    params.append('motivacao', getVal('motivacao'));
 
-      try {
-        await fetch(SHEETS_WEBHOOK_URL, {
-          method: 'POST',
-          mode: 'no-cors',
-          body: JSON.stringify(payload)
-        });
-        document.getElementById('card').classList.add('hide-form');
-        document.getElementById('success').classList.add('show');
-      } catch (err) {
-        console.error(err);
-        alert("Erro ao enviar. Tente novamente.");
-        btnSubmit.disabled = false;
-        btnSubmit.innerText = "Quero me candidatar";
-      }
-    };
+    try {
+      await fetch(SHEETS_WEBHOOK_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: params.toString()
+      });
+      document.getElementById('card').classList.add('hide-form');
+      document.getElementById('success').classList.add('show');
+    } catch (err) {
+      console.error(err);
+      alert("Erro ao enviar. Tente novamente.");
+      btnSubmit.disabled = false;
+      btnSubmit.innerText = "Quero me candidatar";
+    }
   });
 </script>
 </body>
